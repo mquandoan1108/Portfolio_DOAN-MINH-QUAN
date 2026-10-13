@@ -80,7 +80,7 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left: Input Controls Card */}
-          <div className="lg:col-span-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-xs space-y-6">
+          <div className="lg:col-span-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-xs space-y-6 transition-colors duration-200">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
               <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 {currentLang === 'vi' ? 'Thông số giả định vận hành' : 'Operational Assumptions'}
@@ -203,35 +203,35 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
           </div>
 
           {/* Right: Projected Return / Result Card */}
-          <div className="lg:col-span-6 bg-slate-900 text-white rounded-2xl border border-slate-800 p-6 sm:p-8 shadow-xl space-y-6">
+          <div className="lg:col-span-6 bg-white dark:bg-slate-900 text-slate-900 dark:text-white rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm dark:shadow-xl space-y-6 transition-colors duration-200">
             <div>
-              <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">
+              <span className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">
                 {currentLang === 'vi' ? 'Dự báo Giá trị Thặng dư Hàng Năm' : 'Projected Annual Business Value'}
               </span>
-              <div className="text-3xl sm:text-4xl font-extrabold font-mono text-emerald-400 mt-2 tracking-tight tabular-nums">
+              <div className="text-3xl sm:text-4xl font-extrabold font-mono text-emerald-600 dark:text-emerald-400 mt-2 tracking-tight tabular-nums">
                 {formatCurrency(totalAnnualImpact)}
-                <span className="text-sm font-sans text-slate-400 font-normal ml-2">/ {currentLang === 'vi' ? 'năm' : 'year'}</span>
+                <span className="text-sm font-sans text-slate-500 dark:text-slate-400 font-normal ml-2">/ {currentLang === 'vi' ? 'năm' : 'year'}</span>
               </div>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                 {currentLang === 'vi'
                   ? 'Tổng giá trị tạo ra từ chi phí cắt giảm và lợi nhuận bảo vệ qua kiểm soát chất lượng dữ liệu.'
                   : 'Cumulative fiscal upside combined from operational leak prevention and margin defense.'}
               </p>
             </div>
 
-            <div className="space-y-4 pt-4 border-t border-slate-800">
+            <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
               
               {/* Item 1: Waste reduction */}
-              <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-slate-800/60 border border-slate-700/60">
+              <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-emerald-50/70 dark:bg-slate-800/60 border border-emerald-200/70 dark:border-slate-700/60 transition-colors duration-200">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 shrink-0">
+                  <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 shrink-0">
                     <TrendingDown className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-white">
+                    <div className="text-sm font-bold text-slate-900 dark:text-white">
                       {currentLang === 'vi' ? 'Tiết giảm lãng phí chi phí vận hành' : 'Annual OPEX Waste Elimination'}
                     </div>
-                    <div className="text-xs text-slate-400 mt-0.5">
+                    <div className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                       {currentLang === 'vi'
                         ? 'Cảnh báo tự động lộ trình thừa, rò rỉ nhiên liệu và chậm SLA'
                         : 'Eliminating deadhead runs, idle fuel drain, and late SLA penalty risks'}
@@ -239,23 +239,23 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
                   </div>
                 </div>
                 <div className="text-right shrink-0">
-                  <div className="text-base font-extrabold text-emerald-400 font-mono tabular-nums">
+                  <div className="text-base font-extrabold text-emerald-600 dark:text-emerald-400 font-mono tabular-nums">
                     +{formatCurrency(annualSavings)}
                   </div>
                 </div>
               </div>
 
               {/* Item 2: Margin uplift */}
-              <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-slate-800/60 border border-slate-700/60">
+              <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-sky-50/70 dark:bg-slate-800/60 border border-sky-200/70 dark:border-slate-700/60 transition-colors duration-200">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-sky-500/20 text-sky-400 shrink-0">
+                  <div className="p-2 rounded-lg bg-sky-100 dark:bg-sky-500/20 text-sky-700 dark:text-sky-400 shrink-0">
                     <TrendingUp className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-white">
+                    <div className="text-sm font-bold text-slate-900 dark:text-white">
                       {currentLang === 'vi' ? 'Lợi nhuận gộp bảo vệ & tăng thêm' : 'Protected Contract Gross Margin'}
                     </div>
-                    <div className="text-xs text-slate-400 mt-0.5">
+                    <div className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
                       {currentLang === 'vi'
                         ? 'Thẩm định tỷ lệ tải trọng và kịch bản giá thầu trước khi ký'
                         : 'Contract feasibility modeling and minimum yield guarantees'}
@@ -263,7 +263,7 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
                   </div>
                 </div>
                 <div className="text-right shrink-0">
-                  <div className="text-base font-extrabold text-sky-400 font-mono tabular-nums">
+                  <div className="text-base font-extrabold text-sky-600 dark:text-sky-400 font-mono tabular-nums">
                     +{formatCurrency(annualMarginGains)}
                   </div>
                 </div>
@@ -271,8 +271,8 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
 
             </div>
 
-            <div className="pt-2 text-xs text-slate-400 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+            <div className="pt-2 text-xs text-slate-600 dark:text-slate-400 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>
                 {currentLang === 'vi'
                   ? 'Phương pháp luận đã được ứng dụng trực tiếp tại mạng lưới 15 chi nhánh Viettel Logistics.'
