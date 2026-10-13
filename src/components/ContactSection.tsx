@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, ExternalLink, Copy, Check, Send, MapPin, MessageSquare } from 'lucide-react';
+import { Mail, Phone, ExternalLink, Copy, Check, Send, MapPin, MessageSquare, Loader2, AlertCircle } from 'lucide-react';
 import { Language } from '../types';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
@@ -16,6 +16,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 }) => {
   const [emailCopied, setEmailCopied] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'needs_activation' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,10 +32,80 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     setTimeout(() => setEmailCopied(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const getDirectMailtoUrl = () => {
+    const subject = encodeURIComponent(
+      `[Portfolio] Trao đổi công việc từ ${formData.name || 'Đối tác'}${formData.company ? ` (${formData.company})` : ''}`
+    );
+    const body = encodeURIComponent(
+      `Chào anh Quân,\n\nTôi là: ${formData.name || '(Họ tên)'}\nEmail liên hệ: ${formData.email || '(Email)'}\nDoanh nghiệp / Tổ chức: ${formData.company || 'Cá nhân'}\n\nNội dung trao đổi:\n${formData.message || ''}\n\n---\n(Thư gửi từ Portfolio của Doan Minh Quan)`
+    );
+    return `mailto:doanminhquan1108@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  const getDirectGmailUrl = () => {
+    const subject = encodeURIComponent(
+      `[Portfolio] Trao đổi công việc từ ${formData.name || 'Đối tác'}${formData.company ? ` (${formData.company})` : ''}`
+    );
+    const body = encodeURIComponent(
+      `Chào anh Quân,\n\nTôi là: ${formData.name || '(Họ tên)'}\nEmail liên hệ: ${formData.email || '(Email)'}\nDoanh nghiệp / Tổ chức: ${formData.company || 'Cá nhân'}\n\nNội dung trao đổi:\n${formData.message || ''}\n\n---\n(Thư gửi từ Portfolio của Doan Minh Quan)`
+    );
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=doanminhquan1108@gmail.com&su=${subject}&body=${body}`;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-    setFormSubmitted(true);
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
+
+    setIsSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/doanminhquan1108@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          company: formData.company.trim() || 'Cá nhân / Đối tác',
+          message: formData.message.trim(),
+          _subject: `[Portfolio Website] Tin nhắn mới từ ${formData.name.trim()} (${formData.company.trim() || 'Cá nhân'})`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success === 'true' || data.success === true) {
+        setSubmissionStatus('success');
+        setFormSubmitted(true);
+      } else if (data.message && data.message.toLowerCase().includes('activation')) {
+        // FormSubmit first-time activation notification
+        setSubmissionStatus('needs_activation');
+        setFormSubmitted(true);
+      } else {
+        setSubmissionStatus('error');
+        setErrorMessage(
+          data.message ||
+            (currentLang === 'vi'
+              ? 'Không thể gửi thư qua cổng tự động. Vui lòng sử dụng nút gửi trực tiếp qua Gmail bên dưới.'
+              : 'Could not send message automatically. Please use the direct Gmail button below.')
+        );
+      }
+    } catch (err) {
+      console.error('Submit error:', err);
+      setSubmissionStatus('error');
+      setErrorMessage(
+        currentLang === 'vi'
+          ? 'Không thể kết nối đến máy chủ gửi thư. Bạn có thể mở Gmail gửi trực tiếp đến doanminhquan1108@gmail.com.'
+          : 'Network error connecting to mail gateway. You can send directly via Gmail to doanminhquan1108@gmail.com.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -160,34 +233,97 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           {/* Right: Message Form (Span 7) */}
           <div className="lg:col-span-7 bg-slate-800/80 rounded-2xl border border-slate-700/80 p-6 sm:p-8 shadow-xl">
             {formSubmitted ? (
-              <div className="py-12 text-center space-y-4">
-                <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
-                  <Check className="w-7 h-7" />
+              <div className="py-8 text-center space-y-4">
+                {submissionStatus === 'needs_activation' ? (
+                  <>
+                    <div className="w-14 h-14 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto">
+                      <Mail className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white">
+                      {currentLang === 'vi' ? 'Đã gửi thông tin đến doanminhquan1108@gmail.com!' : 'Message Submitted to doanminhquan1108@gmail.com!'}
+                    </h3>
+                    <div className="text-sm text-slate-300 max-w-lg mx-auto leading-relaxed space-y-2 text-left bg-slate-900/80 p-4 rounded-xl border border-amber-500/30">
+                      <p className="font-semibold text-amber-300 flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                        {currentLang === 'vi'
+                          ? 'Bước kích hoạt một lần duy nhất cho hộp thư:'
+                          : 'One-time mailbox activation notice:'}
+                      </p>
+                      <p>
+                        {currentLang === 'vi'
+                          ? 'Hệ thống FormSubmit đã gửi email chứa liên kết "Activate Form" đến hộp thư doanminhquan1108@gmail.com. Anh Quân vui lòng kiểm tra hộp thư đến (hoặc hòm thư Spam) và nhấn Activate Form một lần để mở khóa nhận email tự động không giới hạn.'
+                          : 'FormSubmit has sent an "Activate Form" verification link to doanminhquan1108@gmail.com. Please check your inbox or spam folder and click Activate once to enable instant forwarding.'}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+                      <Check className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white">
+                      {currentLang === 'vi' ? 'Tin nhắn đã được gửi thành công!' : 'Thank you for reaching out!'}
+                    </h3>
+                    <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+                      {currentLang === 'vi'
+                        ? 'Nội dung tin nhắn đã được chuyển tiếp trực tiếp đến doanminhquan1108@gmail.com. Quân sẽ phản hồi qua email hoặc số điện thoại trong vòng 24 giờ.'
+                        : 'Your message has been forwarded directly to doanminhquan1108@gmail.com. Quan will respond to your email or phone within 24 hours.'}
+                    </p>
+                  </>
+                )}
+
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={getDirectGmailUrl()}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 text-white transition-colors"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>{currentLang === 'vi' ? 'Mở gửi trực tiếp qua Gmail' : 'Open in Gmail'}</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                  <button
+                    onClick={() => {
+                      setFormSubmitted(false);
+                      setSubmissionStatus('idle');
+                      setFormData({ name: '', email: '', company: '', message: '' });
+                    }}
+                    type="button"
+                    className="px-4 py-2.5 text-xs font-semibold rounded-lg bg-slate-700 hover:bg-slate-600 text-white transition-colors"
+                  >
+                    {currentLang === 'vi' ? 'Gửi tin nhắn khác' : 'Send another message'}
+                  </button>
                 </div>
-                <h3 className="text-xl font-bold text-white">
-                  {currentLang === 'vi' ? 'Cảm ơn bạn đã gửi tin nhắn!' : 'Thank you for reaching out!'}
-                </h3>
-                <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-                  {currentLang === 'vi'
-                    ? 'Thông tin đã được ghi nhận. Quân sẽ phản hồi qua email hoặc số điện thoại trong vòng 24 giờ.'
-                    : "Your message has been received. Quan will respond to your email or phone within 24 hours."}
-                </p>
-                <button
-                  onClick={() => {
-                    setFormSubmitted(false);
-                    setFormData({ name: '', email: '', company: '', message: '' });
-                  }}
-                  type="button"
-                  className="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-700 hover:bg-slate-600 text-white transition-colors"
-                >
-                  {currentLang === 'vi' ? 'Gửi tin nhắn khác' : 'Send another message'}
-                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <h3 className="text-lg font-bold text-white mb-2">
-                  {currentLang === 'vi' ? 'Gửi Lời Nhắn Nhanh' : 'Send a Quick Message'}
-                </h3>
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="text-lg font-bold text-white">
+                    {currentLang === 'vi' ? 'Gửi Lời Nhắn Nhanh' : 'Send a Quick Message'}
+                  </h3>
+                  <span className="text-[11px] font-mono text-sky-400 bg-sky-950/60 border border-sky-800/50 px-2 py-0.5 rounded-md">
+                    doanminhquan1108@gmail.com
+                  </span>
+                </div>
+
+                {submissionStatus === 'error' && (
+                  <div className="p-3.5 rounded-lg bg-rose-950/40 border border-rose-800/60 text-xs text-rose-200 flex items-start gap-2.5">
+                    <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                    <div className="space-y-2">
+                      <p>{errorMessage}</p>
+                      <a
+                        href={getDirectGmailUrl()}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sky-300 hover:text-white font-medium underline"
+                      >
+                        <Mail className="w-3.5 h-3.5" />
+                        <span>{currentLang === 'vi' ? 'Mở Gmail gửi trực tiếp' : 'Open in Gmail directly'}</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
@@ -254,19 +390,53 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-semibold transition-all active:scale-[0.99] shadow-sm"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>{currentLang === 'vi' ? 'Gửi Thông Điệp' : 'Submit Message'}</span>
-                </button>
+                <div className="space-y-2.5 pt-1">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:bg-sky-800 disabled:cursor-not-allowed text-white text-sm font-semibold transition-all active:scale-[0.99] shadow-sm cursor-pointer"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>{currentLang === 'vi' ? 'Đang gửi đến doanminhquan1108@gmail.com...' : 'Sending to doanminhquan1108@gmail.com...'}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>{currentLang === 'vi' ? 'Gửi Thông Điệp Đến Email' : 'Submit Message to Email'}</span>
+                      </>
+                    )}
+                  </button>
+
+                  <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
+                    <span>{currentLang === 'vi' ? 'Hoặc gửi qua ứng dụng:' : 'Or compose directly:'}</span>
+                    <div className="flex items-center gap-3">
+                      <a
+                        href={getDirectGmailUrl()}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-sky-400 hover:text-sky-300 font-medium transition-colors"
+                      >
+                        <Mail className="w-3.5 h-3.5" />
+                        <span>{currentLang === 'vi' ? 'Soạn trên Gmail' : 'Gmail Web'}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                      <span className="text-slate-600">·</span>
+                      <a
+                        href={getDirectMailtoUrl()}
+                        className="inline-flex items-center gap-1 text-slate-300 hover:text-white font-medium transition-colors"
+                      >
+                        <span>{currentLang === 'vi' ? 'Mail Client' : 'Mail App'}</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </form>
             )}
           </div>
 
         </div>
-
       </div>
     </section>
   );
