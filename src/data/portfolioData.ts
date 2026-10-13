@@ -83,7 +83,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: 'exp-1',
     role: {
-      vi: 'Business Quality Control Manager',
+      vi: 'Trưởng bộ phận Chất lượng kinh doanh',
       en: 'Business Quality Control Manager',
     },
     company: 'Viettel Logistics',
@@ -122,7 +122,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: 'exp-2',
     role: {
-      vi: 'Fleet Team Leader',
+      vi: 'Đội trưởng đội xe',
       en: 'Fleet Team Leader',
     },
     company: 'Viettel Logistics',
@@ -164,7 +164,7 @@ export const EXPERIENCES: Experience[] = [
   {
     id: 'exp-3',
     role: {
-      vi: 'Airline Ground Operations Collaborator',
+      vi: 'Đại diện hãng Hàng không',
       en: 'Airline Ground Operations Collaborator',
     },
     company: 'Saigon Ground Services (SAGS)',
@@ -224,8 +224,8 @@ export const PROJECTS: Project[] = [
       'Fleet Telemetry',
     ],
     metrics: [
-      { label: { vi: 'Quy mô đội xe giám sát', en: 'Fleet Scope' }, value: { vi: '110 Xe đa tải trọng', en: '110 Multi-ton Trucks' } },
-      { label: { vi: 'Nguồn dữ liệu hợp nhất', en: 'Data Sources' }, value: { vi: '5 Tệp Excel thô', en: '5 Raw Excel Files' } },
+      { label: { vi: 'Quy mô đội xe giám sát', en: 'Fleet Scope' }, value: { vi: '110 Xe', en: '110 Multi-ton Trucks' } },
+      { label: { vi: 'Nguồn dữ liệu hợp nhất', en: 'Data Sources' }, value: { vi: '5 Tệp Excel', en: '5 Raw Excel Files' } },
       { label: { vi: 'Tần suất giám sát', en: 'Tracking Cadence' }, value: { vi: 'Hàng ngày', en: 'Daily' } },
     ],
     challenge: {
