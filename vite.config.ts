@@ -6,7 +6,8 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
-    base: '/Portfolio_DOAN-MINH-QUAN/',
+    // Base is set to repository name in GitHub Actions CI, and './' in dev / AI Studio preview
+    base: process.env.GITHUB_ACTIONS ? '/Portfolio_DOAN-MINH-QUAN/' : './',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

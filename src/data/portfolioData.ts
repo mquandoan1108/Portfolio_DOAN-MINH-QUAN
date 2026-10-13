@@ -1,4 +1,11 @@
 import { Project, Experience, SkillCategory } from '../types';
+import heroPortraitImg from '../assets/images/hero_portrait_1791794365492.jpg';
+import projectLookerVhkdImg from '../assets/images/project_looker_vhkd_1791796308125.jpg';
+import projectLogisticsRouteImg from '../assets/images/project_logistics_route_1791794404484.jpg';
+import projectBiPerformanceImg from '../assets/images/project_bi_performance_1711536390647.jpg';
+import projectHrAttritionImg from '../assets/images/regenerated_image_1791804066294.png';
+import projectBiDashboardImg from '../assets/images/project_bi_dashboard_1791794379618.jpg';
+import projectCovid19Img from '../assets/images/regenerated_image_1791802665500.png';
 
 export const PERSONAL_INFO = {
   name: 'Doan Minh Quan',
@@ -23,7 +30,7 @@ export const PERSONAL_INFO = {
     vi: 'TP. Hồ Chí Minh, Việt Nam',
     en: 'Ho Chi Minh City, Vietnam',
   },
-  heroImage: '/src/assets/images/hero_portrait_1791794365492.jpg',
+  heroImage: heroPortraitImg,
   stats: [
     {
       value: '99.65%',
@@ -291,7 +298,7 @@ export const PROJECTS: Project[] = [
         },
       },
     ],
-    image: '/src/assets/images/project_looker_vhkd_1791796308125.jpg',
+    image: projectLookerVhkdImg,
     featured: true,
   },
   {
@@ -331,7 +338,7 @@ export const PROJECTS: Project[] = [
       vi: 'Đạt tỷ lệ hoàn thành KPI 99.65%, tăng 5% doanh thu vận tải trên từng tuyến huyết mạch và tiết giảm 7% ngân sách vận hành.',
       en: 'Attained a 99.65% SLA rating, grew core line-haul route revenues by 5%, and trimmed operating expenses by 7%.',
     },
-    image: '/src/assets/images/project_logistics_route_1791794404484.jpg',
+    image: projectLogisticsRouteImg,
     featured: true,
   },
   {
@@ -371,7 +378,7 @@ export const PROJECTS: Project[] = [
       vi: 'Giảm 80% thời gian tổng hợp báo cáo tháng, giúp phát hiện sớm các chuyến xe âm biên lợi nhuận để điều chỉnh giá thầu hoặc định tuyến kịp thời.',
       en: 'Cut monthly reporting synthesis time by 80%, providing early visibility into unprofitable freight lanes to renegotiate contract rates or adjust routing proactively.',
     },
-    image: '/src/assets/images/project_bi_performance_1711536390647.jpg',
+    image: projectBiPerformanceImg,
     featured: true,
   },
   {
@@ -411,7 +418,7 @@ export const PROJECTS: Project[] = [
       vi: 'Cung cấp cơ sở định lượng để phòng Nhân sự điều chỉnh chính sách phụ cấp chuyến xe và lịch trình nghỉ ngơi, giảm tỷ lệ nghỉ việc đột ngột.',
       en: 'Supplied actionable insights for HR and fleet directors to restructure driver shift allowances and rest schedules, stabilizing operational crew retention.',
     },
-    image: '/src/assets/images/regenerated_image_1791804066294.png',
+    image: projectHrAttritionImg,
     featured: true,
   },
   {
@@ -451,7 +458,7 @@ export const PROJECTS: Project[] = [
       vi: 'Đề xuất giải pháp tăng 14% tỷ lệ mua kèm và giảm tỷ lệ tồn kho quá hạn của các mặt hàng tiêu dùng nhanh.',
       en: 'Recommended strategic cross-sell combos projected to boost cross-category attachment by 14% while lowering perishable stock write-offs.',
     },
-    image: '/src/assets/images/project_bi_dashboard_1791794379618.jpg',
+    image: projectBiDashboardImg,
   },
   {
     id: 'proj-4',
@@ -490,7 +497,7 @@ export const PROJECTS: Project[] = [
       vi: 'Tạo báo cáo phân tích tương quan khoa học, phục vụ nghiên cứu tác động rủi ro hệ thống đến chuỗi cung ứng thương mại quốc tế.',
       en: 'Delivered rigorous empirical evidence explaining how macro containment measures disrupted international shipping lanes and manufacturing resilience.',
     },
-    image: '/src/assets/images/regenerated_image_1791802665500.png',
+    image: projectCovid19Img,
   },
 ];
 
