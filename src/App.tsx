@@ -25,13 +25,16 @@ export default function App() {
   const [phoneCopied, setPhoneCopied] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Sync dark class on document element
+  // Sync dark class on document element & body
   useEffect(() => {
+    const root = document.documentElement;
     if (isDark) {
-      document.documentElement.classList.add('dark');
+      root.classList.add('dark');
+      document.body.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      root.classList.remove('dark');
+      document.body.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
   }, [isDark]);
@@ -40,15 +43,27 @@ export default function App() {
     setCurrentLang((prev) => (prev === 'vi' ? 'en' : 'vi'));
   };
 
-  const toggleDarkMode = () => {
-    setIsDark((prev) => !prev);
-  };
-
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => {
       setToastMessage(null);
     }, 2800);
+  };
+
+  const toggleDarkMode = () => {
+    setIsDark((prev) => {
+      const next = !prev;
+      showToast(
+        currentLang === 'vi'
+          ? next
+            ? 'Đã chuyển sang Chế độ tối (Dark mode)'
+            : 'Đã chuyển sang Chế độ sáng (Light mode)'
+          : next
+            ? 'Switched to Dark mode'
+            : 'Switched to Light mode'
+      );
+      return next;
+    });
   };
 
   const handleCopyPhone = () => {
@@ -59,7 +74,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
+    <div className={`min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 ${isDark ? 'dark' : ''}`}>
       
       {/* Navigation Top Bar Contract */}
       <Navbar
