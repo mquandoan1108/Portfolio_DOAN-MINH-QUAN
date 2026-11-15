@@ -14,17 +14,23 @@ import {
   Plus,
   Check,
   Lock,
+  Download,
+  FolderUp,
+  Loader2,
 } from 'lucide-react';
 import { Project, ProjectGalleryItem, Language } from '../types';
 
 interface ProjectDetailModalProps {
   project: Project | null;
   slides: ProjectGalleryItem[];
+  totalCustomSlidesCount: number;
   onAddSlides: (projectId: string, files: File[]) => Promise<number>;
   onUpdateSlideLabel: (slideId: string, label: string) => Promise<void>;
   onMoveCustomSlide: (projectId: string, slideId: string, direction: 'prev' | 'next') => Promise<void>;
   onRemoveSlide: (slideId: string) => Promise<void>;
   onClearCustomSlides: (projectId: string) => Promise<void>;
+  onExportBackup: () => Promise<number>;
+  onImportBackup: (file: File) => Promise<{ importedCount: number; projectCount: number }>;
   onClose: () => void;
   currentLang: Language;
 }
@@ -32,11 +38,14 @@ interface ProjectDetailModalProps {
 export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   project,
   slides,
+  totalCustomSlidesCount,
   onAddSlides,
   onUpdateSlideLabel,
   onMoveCustomSlide,
   onRemoveSlide,
   onClearCustomSlides,
+  onExportBackup,
+  onImportBackup,
   onClose,
   currentLang,
 }) => {
@@ -48,8 +57,14 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [confirmClearAll, setConfirmClearAll] = useState(false);
   const [editingLabels, setEditingLabels] = useState<Record<string, string>>({});
+  const [isBackupBusy, setIsBackupBusy] = useState(false);
+  const [backupFeedback, setBackupFeedback] = useState<{
+    type: 'success' | 'error';
+    message: string;
+  } | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const backupInputRef = useRef<HTMLInputElement | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -65,6 +80,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
     setUploadError(null);
     setConfirmClearAll(false);
     setEditingLabels({});
+    setBackupFeedback(null);
   }, [project?.id]);
 
   // Clamp activeIndex if slides are deleted
@@ -198,6 +214,79 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
       delete copy[slideId];
       return copy;
     });
+  };
+
+  const handleExportBackupClick = async () => {
+    setBackupFeedback(null);
+    setIsBackupBusy(true);
+    try {
+      const count = await onExportBackup();
+      if (count === 0) {
+        setBackupFeedback({
+          type: 'error',
+          message:
+            currentLang === 'vi'
+              ? 'Chưa có ảnh tải lên nào để xuất sao lưu.'
+              : 'No uploaded screenshots found to export yet.',
+        });
+      } else {
+        setBackupFeedback({
+          type: 'success',
+          message:
+            currentLang === 'vi'
+              ? `Đã xuất thành công ${count} ảnh gốc sang tệp sao lưu (.json).`
+              : `Exported ${count} original image(s) into portable backup (.json).`,
+        });
+      }
+    } catch (err) {
+      console.error('Export backup error:', err);
+      setBackupFeedback({
+        type: 'error',
+        message:
+          currentLang === 'vi'
+            ? 'Không thể xuất tệp sao lưu. Vui lòng thử lại.'
+            : 'Could not export backup file. Please try again.',
+      });
+    } finally {
+      setIsBackupBusy(false);
+    }
+  };
+
+  const handleImportBackupFile = async (fileList: FileList | null) => {
+    const file = fileList?.[0];
+    if (!file) return;
+
+    setBackupFeedback(null);
+    setIsBackupBusy(true);
+    try {
+      const { importedCount, projectCount } = await onImportBackup(file);
+      setBackupFeedback({
+        type: 'success',
+        message:
+          currentLang === 'vi'
+            ? `Đã khôi phục ${importedCount} ảnh gốc cho ${projectCount} dự án.`
+            : `Restored ${importedCount} original image(s) across ${projectCount} project(s).`,
+      });
+    } catch (err) {
+      console.error('Import backup error:', err);
+      const code = err instanceof Error ? err.message : '';
+      let msg =
+        currentLang === 'vi'
+          ? 'Tệp sao lưu không hợp lệ hoặc bị hỏng.'
+          : 'Invalid or corrupted backup file.';
+      if (code === 'EMPTY_BACKUP') {
+        msg =
+          currentLang === 'vi'
+            ? 'Tệp sao lưu không chứa dữ liệu hình ảnh nào.'
+            : 'This backup file contains no image records.';
+      }
+      setBackupFeedback({ type: 'error', message: msg });
+    } finally {
+      setIsBackupBusy(false);
+      if (backupInputRef.current) {
+        backupInputRef.current.value = '';
+      }
+    }
   };
 
   if (!project) return null;
@@ -484,6 +573,78 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                       </div>
                     );
                   })}
+                </div>
+
+                {/* Cross-Device Portable Backup Bar */}
+                <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2.5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <div className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                        {currentLang === 'vi'
+                          ? 'Sao lưu & Chuyển ảnh sang thiết bị khác'
+                          : 'Cross-Device Gallery Backup'}
+                      </div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                        {currentLang === 'vi'
+                          ? `Xuất toàn bộ ${totalCustomSlidesCount} ảnh đã tải lên thành tệp .json để nhập lại trên máy hoặc trình duyệt khác.`
+                          : `Export all ${totalCustomSlidesCount} uploaded screenshot(s) as a portable .json archive to restore on another device.`}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2 shrink-0">
+                      <button
+                        type="button"
+                        disabled={isBackupBusy || totalCustomSlidesCount === 0}
+                        onClick={handleExportBackupClick}
+                        className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[38px] text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
+                      >
+                        {isBackupBusy ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        ) : (
+                          <Download className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+                        )}
+                        <span>
+                          {currentLang === 'vi' ? 'Xuất sao lưu (.json)' : 'Export Backup'}
+                        </span>
+                      </button>
+
+                      <input
+                        ref={backupInputRef}
+                        type="file"
+                        accept=".json,application/json"
+                        className="hidden"
+                        onChange={(e) => handleImportBackupFile(e.target.files)}
+                      />
+                      <button
+                        type="button"
+                        disabled={isBackupBusy}
+                        onClick={() => backupInputRef.current?.click()}
+                        className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[38px] text-xs font-semibold rounded-lg border border-sky-200 dark:border-sky-900 bg-sky-50 dark:bg-sky-950/50 text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-950 disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
+                      >
+                        <FolderUp className="w-3.5 h-3.5" />
+                        <span>
+                          {currentLang === 'vi' ? 'Nhập bản sao lưu' : 'Import Backup'}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {backupFeedback && (
+                    <div
+                      className={`flex items-center gap-2 p-2.5 rounded-lg border text-xs ${
+                        backupFeedback.type === 'success'
+                          ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900 text-emerald-700 dark:text-emerald-300'
+                          : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-300'
+                      }`}
+                    >
+                      {backupFeedback.type === 'success' ? (
+                        <Check className="w-4 h-4 shrink-0" />
+                      ) : (
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                      )}
+                      <span>{backupFeedback.message}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

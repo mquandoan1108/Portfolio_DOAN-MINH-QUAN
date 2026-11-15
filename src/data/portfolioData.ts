@@ -350,6 +350,17 @@ export const PROJECTS: Project[] = [
       en: 'Attained a 99.65% SLA rating, grew core line-haul route revenues by 5%, and trimmed operating expenses by 7%.',
     },
     image: projectLogisticsRouteImg,
+    gallery: [
+      {
+        id: 'builtin-logistics-route',
+        src: projectLogisticsRouteImg,
+        label: {
+          vi: 'Logistics Fleet Dispatch & Network Route Optimization',
+          en: 'Logistics Fleet Dispatch & Network Route Optimization',
+        },
+        isCustom: false,
+      },
+    ],
     featured: true,
   },
   {
@@ -390,6 +401,17 @@ export const PROJECTS: Project[] = [
       en: 'Cut monthly reporting synthesis time by 80%, providing early visibility into unprofitable freight lanes to renegotiate contract rates or adjust routing proactively.',
     },
     image: projectBiPerformanceImg,
+    gallery: [
+      {
+        id: 'builtin-bi-performance',
+        src: projectBiPerformanceImg,
+        label: {
+          vi: 'Business Performance & P&L Executive Dashboard',
+          en: 'Business Performance & P&L Executive Dashboard',
+        },
+        isCustom: false,
+      },
+    ],
     featured: true,
   },
   {
@@ -481,6 +503,17 @@ export const PROJECTS: Project[] = [
       en: 'Recommended strategic cross-sell combos projected to boost cross-category attachment by 14% while lowering perishable stock write-offs.',
     },
     image: projectBiDashboardImg,
+    gallery: [
+      {
+        id: 'builtin-supermarket-basket',
+        src: projectBiDashboardImg,
+        label: {
+          vi: 'Supermarket Sales & Customer Basket Behavior Analysis',
+          en: 'Supermarket Sales & Customer Basket Behavior Analysis',
+        },
+        isCustom: false,
+      },
+    ],
   },
   {
     id: 'proj-4',
@@ -520,6 +553,17 @@ export const PROJECTS: Project[] = [
       en: 'Delivered rigorous empirical evidence explaining how macro containment measures disrupted international shipping lanes and manufacturing resilience.',
     },
     image: projectCovid19Img,
+    gallery: [
+      {
+        id: 'builtin-covid-eda',
+        src: projectCovid19Img,
+        label: {
+          vi: 'COVID-19 Global Socioeconomic Impact & GDP EDA',
+          en: 'COVID-19 Global Socioeconomic Impact & GDP EDA',
+        },
+        isCustom: false,
+      },
+    ],
   },
 ];
 

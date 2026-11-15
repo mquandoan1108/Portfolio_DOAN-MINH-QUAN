@@ -13,12 +13,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
   const {
+    totalCustomSlidesCount,
     getSlidesForProject,
     addSlides,
     updateSlideLabel,
     moveCustomSlide,
     removeSlide,
     clearCustomSlides,
+    exportBackup,
+    importBackup,
   } = useProjectGalleries();
 
   const categories = [
@@ -86,7 +89,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
             const isWide = selectedCategory === 'all' ? (idx === 0 || idx === 3) : false;
             const projectSlides = getSlidesForProject(project);
             const hasMultiSlides = projectSlides.length > 1;
-            const supportsGallery = Boolean(project.gallery) || hasMultiSlides;
 
             return (
               <div
@@ -114,13 +116,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
                     <span>{project.categoryLabel[currentLang]}</span>
                   </div>
 
-                  {/* Corner Gallery Count & Expand Indicator */}
+                  {/* Corner Gallery Count (only shown when 2+ images) & Expand Indicator */}
                   <div className="absolute bottom-4 right-4 flex items-center gap-2">
-                    {supportsGallery && (
+                    {hasMultiSlides && (
                       <div className="px-2.5 py-1.5 rounded-lg bg-slate-900/75 backdrop-blur-md text-white text-xs font-semibold font-mono tabular-nums flex items-center gap-1.5 shadow-sm">
                         <Images className="w-3.5 h-3.5 text-sky-400" />
                         <span>
-                          {projectSlides.length} {currentLang === 'vi' ? 'ảnh' : projectSlides.length === 1 ? 'slide' : 'slides'}
+                          {projectSlides.length} {currentLang === 'vi' ? 'ảnh' : 'slides'}
                         </span>
                       </div>
                     )}
@@ -184,11 +186,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
       <ProjectDetailModal
         project={activeModalProject}
         slides={getSlidesForProject(activeModalProject)}
+        totalCustomSlidesCount={totalCustomSlidesCount}
         onAddSlides={addSlides}
         onUpdateSlideLabel={updateSlideLabel}
         onMoveCustomSlide={moveCustomSlide}
         onRemoveSlide={removeSlide}
         onClearCustomSlides={clearCustomSlides}
+        onExportBackup={exportBackup}
+        onImportBackup={importBackup}
         onClose={() => setActiveModalProject(null)}
         currentLang={currentLang}
       />

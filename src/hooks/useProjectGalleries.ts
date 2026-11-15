@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Project, ProjectGalleryItem } from '../types';
 import {
   StoredGallerySlideRecord,
@@ -8,6 +8,8 @@ import {
   saveSlideOrder,
   deleteStoredGallerySlide,
   clearProjectStoredGallerySlides,
+  exportAllGalleriesToBackup,
+  importGalleriesFromBackup,
 } from '../utils/galleryStorage';
 
 export function useProjectGalleries() {
@@ -64,6 +66,10 @@ export function useProjectGalleries() {
       activeUrlsRef.current = {};
     };
   }, [refreshFromStorage]);
+
+  const totalCustomSlidesCount = useMemo(() => {
+    return Object.values(recordsByProject).reduce((sum, list) => sum + list.length, 0);
+  }, [recordsByProject]);
 
   const getSlidesForProject = useCallback(
     (project: Project | null): ProjectGalleryItem[] => {
@@ -160,13 +166,43 @@ export function useProjectGalleries() {
     [refreshFromStorage]
   );
 
+  const exportBackup = useCallback(async (): Promise<number> => {
+    const backup = await exportAllGalleriesToBackup();
+    const count = backup.slides.length;
+    if (count === 0) return 0;
+
+    const jsonBlob = new Blob([JSON.stringify(backup)], { type: 'application/json' });
+    const url = URL.createObjectURL(jsonBlob);
+    const dateStamp = new Date().toISOString().slice(0, 10);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `portfolio-gallery-backup-${dateStamp}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    return count;
+  }, []);
+
+  const importBackup = useCallback(
+    async (file: File): Promise<{ importedCount: number; projectCount: number }> => {
+      const result = await importGalleriesFromBackup(file);
+      await refreshFromStorage();
+      return result;
+    },
+    [refreshFromStorage]
+  );
+
   return {
     isLoaded,
+    totalCustomSlidesCount,
     getSlidesForProject,
     addSlides,
     updateSlideLabel,
     moveCustomSlide,
     removeSlide,
     clearCustomSlides,
+    exportBackup,
+    importBackup,
   };
 }

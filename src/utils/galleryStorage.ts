@@ -10,6 +10,25 @@ export interface StoredGallerySlideRecord {
   createdAt: number;
 }
 
+export interface PortableGallerySlide {
+  id: string;
+  projectId: string;
+  fileName: string;
+  mimeType: string;
+  labelVi: string;
+  labelEn: string;
+  order: number;
+  createdAt: number;
+  dataBase64: string;
+}
+
+export interface PortableGalleryBackup {
+  version: 1;
+  app: 'portfolio-gallery-backup';
+  exportedAt: string;
+  slides: PortableGallerySlide[];
+}
+
 const DB_NAME = 'portfolio_original_galleries_db';
 const DB_VERSION = 1;
 const STORE_NAME = 'project_slides';
@@ -38,6 +57,33 @@ function openGalleryDb(): Promise<IDBDatabase> {
 
 function stripFileExtension(fileName: string): string {
   return fileName.replace(/\.[^/.]+$/, '').trim() || 'Screenshot';
+}
+
+function blobToBase64(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const result = typeof reader.result === 'string' ? reader.result : '';
+      const commaIdx = result.indexOf(',');
+      if (commaIdx === -1) {
+        reject(new Error('Failed to encode binary image data.'));
+        return;
+      }
+      resolve(result.slice(commaIdx + 1));
+    };
+    reader.onerror = () => reject(reader.error || new Error('FileReader failed while exporting image.'));
+    reader.readAsDataURL(blob);
+  });
+}
+
+function base64ToBlob(base64: string, mimeType: string): Blob {
+  const binary = atob(base64);
+  const len = binary.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return new Blob([bytes], { type: mimeType || 'image/jpeg' });
 }
 
 export async function getAllStoredGallerySlides(): Promise<StoredGallerySlideRecord[]> {
@@ -169,4 +215,110 @@ export async function clearProjectStoredGallerySlides(projectId: string): Promis
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(tx.error || new Error('Failed to clear custom slides.'));
   });
+}
+
+export async function exportAllGalleriesToBackup(): Promise<PortableGalleryBackup> {
+  const allRecords = await getAllStoredGallerySlides();
+  const slides: PortableGallerySlide[] = await Promise.all(
+    allRecords.map(async (rec) => ({
+      id: rec.id,
+      projectId: rec.projectId,
+      fileName: rec.fileName,
+      mimeType: rec.mimeType,
+      labelVi: rec.labelVi,
+      labelEn: rec.labelEn,
+      order: rec.order,
+      createdAt: rec.createdAt,
+      dataBase64: await blobToBase64(rec.blob),
+    }))
+  );
+
+  return {
+    version: 1,
+    app: 'portfolio-gallery-backup',
+    exportedAt: new Date().toISOString(),
+    slides,
+  };
+}
+
+export async function importGalleriesFromBackup(
+  file: File
+): Promise<{ importedCount: number; projectCount: number }> {
+  const rawText = await file.text();
+  let parsed: unknown;
+
+  try {
+    parsed = JSON.parse(rawText);
+  } catch {
+    throw new Error('INVALID_JSON');
+  }
+
+  if (
+    !parsed ||
+    typeof parsed !== 'object' ||
+    (parsed as PortableGalleryBackup).app !== 'portfolio-gallery-backup' ||
+    !Array.isArray((parsed as PortableGalleryBackup).slides)
+  ) {
+    throw new Error('INVALID_SCHEMA');
+  }
+
+  const candidateSlides = (parsed as PortableGalleryBackup).slides;
+  const validRecords: StoredGallerySlideRecord[] = [];
+  const affectedProjects = new Set<string>();
+
+  for (const item of candidateSlides) {
+    if (
+      !item ||
+      typeof item.id !== 'string' ||
+      typeof item.projectId !== 'string' ||
+      typeof item.dataBase64 !== 'string' ||
+      !item.dataBase64
+    ) {
+      continue;
+    }
+
+    const mimeType =
+      typeof item.mimeType === 'string' && item.mimeType.startsWith('image/')
+        ? item.mimeType
+        : 'image/jpeg';
+
+    const blob = base64ToBlob(item.dataBase64, mimeType);
+    const fallbackName =
+      typeof item.fileName === 'string' && item.fileName.trim()
+        ? item.fileName
+        : 'screenshot.jpg';
+
+    validRecords.push({
+      id: item.id,
+      projectId: item.projectId,
+      fileName: fallbackName,
+      mimeType,
+      blob,
+      labelVi: typeof item.labelVi === 'string' ? item.labelVi : stripFileExtension(fallbackName),
+      labelEn: typeof item.labelEn === 'string' ? item.labelEn : stripFileExtension(fallbackName),
+      order: typeof item.order === 'number' ? item.order : 0,
+      createdAt: typeof item.createdAt === 'number' ? item.createdAt : Date.now(),
+    });
+    affectedProjects.add(item.projectId);
+  }
+
+  if (validRecords.length === 0) {
+    throw new Error('EMPTY_BACKUP');
+  }
+
+  const db = await openGalleryDb();
+  await new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    for (const record of validRecords) {
+      store.put(record);
+    }
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error || new Error('Failed to import backup into IndexedDB.'));
+  });
+
+  return {
+    importedCount: validRecords.length,
+    projectCount: affectedProjects.size,
+  };
 }
