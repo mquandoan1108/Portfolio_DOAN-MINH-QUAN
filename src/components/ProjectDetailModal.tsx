@@ -307,7 +307,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           onClick={onClose}
           type="button"
           className="absolute top-4 right-4 z-20 p-2.5 min-h-[40px] min-w-[40px] flex items-center justify-center rounded-full bg-zinc-900/80 hover:bg-zinc-900 text-white backdrop-blur-md transition-colors border border-white/10"
-          aria-label="Close modal"
+          aria-label={currentLang === 'vi' ? 'Đóng cửa sổ' : 'Close modal'}
         >
           <X className="w-5 h-5" />
         </button>
@@ -473,7 +473,10 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
                   {slides.map((slide, idx) => {
                     const slideId = slide.id || `slide-${idx}`;
-                    const currentLabel = slide.label?.[currentLang] || slide.fileName || `Slide ${idx + 1}`;
+                    const currentLabel =
+                      slide.label?.[currentLang] ||
+                      slide.fileName ||
+                      (currentLang === 'vi' ? `Ảnh ${idx + 1}` : `Slide ${idx + 1}`);
                     const draftValue = editingLabels[slideId];
                     const customIdx = customSlides.findIndex((c) => c.id === slide.id);
                     const isFirstCustom = customIdx <= 0;
@@ -522,7 +525,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                                 <button
                                   type="button"
                                   onClick={() => handleLabelCommit(slideId, currentLabel)}
-                                  aria-label="Save title"
+                                  aria-label={currentLang === 'vi' ? 'Lưu tiêu đề' : 'Save title'}
                                   className="p-1.5 rounded-lg bg-orange-600 text-white hover:bg-orange-500 shrink-0"
                                 >
                                   <Check className="w-3.5 h-3.5" />
@@ -738,7 +741,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                         key={slide.id || dotIdx}
                         type="button"
                         onClick={() => setActiveIndex(dotIdx)}
-                        aria-label={`Slide ${dotIdx + 1}`}
+                        aria-label={currentLang === 'vi' ? `Ảnh ${dotIdx + 1}` : `Slide ${dotIdx + 1}`}
                         className={`h-1.5 rounded-full transition-all ${
                           dotIdx === activeIndex
                             ? 'w-5 bg-orange-500'
@@ -765,11 +768,17 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                         ? 'border-orange-500 ring-2 ring-orange-500/30 opacity-100 scale-[1.02]'
                         : 'border-stone-200 dark:border-zinc-700 opacity-65 hover:opacity-100'
                     }`}
-                    title={slide.label?.[currentLang] || `Slide ${tIdx + 1}`}
+                    title={
+                      slide.label?.[currentLang] ||
+                      (currentLang === 'vi' ? `Ảnh ${tIdx + 1}` : `Slide ${tIdx + 1}`)
+                    }
                   >
                     <img
                       src={slide.src}
-                      alt={slide.label?.[currentLang] || `Thumbnail ${tIdx + 1}`}
+                      alt={
+                        slide.label?.[currentLang] ||
+                        (currentLang === 'vi' ? `Ảnh thu nhỏ ${tIdx + 1}` : `Thumbnail ${tIdx + 1}`)
+                      }
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover"
                     />
@@ -934,7 +943,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     key={idx}
                     className="text-xs font-semibold px-2.5 py-1 rounded-md bg-stone-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-mono"
                   >
-                    {tool}
+                    {typeof tool === 'string' ? tool : tool[currentLang]}
                   </span>
                 ))}
               </div>
@@ -1038,7 +1047,10 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                 >
                   <img
                     src={slide.src}
-                    alt={slide.label?.[currentLang] || `Slide ${lIdx + 1}`}
+                    alt={
+                      slide.label?.[currentLang] ||
+                      (currentLang === 'vi' ? `Ảnh ${lIdx + 1}` : `Slide ${lIdx + 1}`)
+                    }
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"
                   />

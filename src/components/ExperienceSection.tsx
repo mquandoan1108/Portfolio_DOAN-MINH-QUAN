@@ -23,9 +23,9 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
         {/* Section Header with balanced headline & unboxed kicker */}
         <div className="max-w-3xl mb-12">
           <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 tracking-wide uppercase mb-2">
-            <span>Career History</span>
+            <span>{currentLang === 'vi' ? 'Lịch sử nghề nghiệp' : 'Career History'}</span>
             <span aria-hidden="true" className="mx-2 text-stone-300 dark:text-zinc-700">·</span>
-            <span>Proven Track Record</span>
+            <span>{currentLang === 'vi' ? 'Thành tích thực tế' : 'Proven Track Record'}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white text-balance">
             {currentLang === 'vi' ? 'Hành Trình Sự Nghiệp & Thành Tích Vận Hành' : 'Work Experience & Operational Milestones'}
@@ -72,7 +72,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
                   <div className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 mt-1">
                     <span className="font-semibold text-zinc-800 dark:text-zinc-200">{exp.company}</span>
                     <span aria-hidden="true">·</span>
-                    <span>{exp.location}</span>
+                    <span>{exp.location[currentLang]}</span>
                   </div>
 
                   {/* Summary Metric Chips (Clean text with separator) */}
@@ -108,7 +108,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
                   <span aria-hidden="true">·</span>
                   <span className="inline-flex items-center gap-1">
                     <MapPin className="w-3.5 h-3.5" />
-                    {selectedExp.location}
+                    {selectedExp.location[currentLang]}
                   </span>
                 </div>
               </div>
@@ -156,7 +156,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
                 {selectedExp.coreSkills.map((skill, idx) => (
                   <span key={idx} className="inline-flex items-center gap-1.5 font-medium">
                     <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-                    {skill}
+                    {typeof skill === 'string' ? skill : skill[currentLang]}
                   </span>
                 ))}
               </div>

@@ -29,9 +29,13 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
   const formatCurrency = (valMlnVnd: number) => {
     if (currency === 'vnd') {
       if (valMlnVnd >= 1000) {
-        return `${(valMlnVnd / 1000).toFixed(2)} Tỷ VNĐ`;
+        return currentLang === 'vi'
+          ? `${(valMlnVnd / 1000).toFixed(2)} Tỷ VNĐ`
+          : `${(valMlnVnd / 1000).toFixed(2)}B VND`;
       }
-      return `${Math.round(valMlnVnd).toLocaleString()} Triệu VNĐ`;
+      return currentLang === 'vi'
+        ? `${Math.round(valMlnVnd).toLocaleString()} Triệu VNĐ`
+        : `${Math.round(valMlnVnd).toLocaleString()}M VND`;
     } else {
       // rough 1 USD = 25,000 VND -> 1 Mln VND = $40 USD
       const usdVal = valMlnVnd * 40;
@@ -60,9 +64,9 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
           <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 tracking-wide uppercase mb-2">
-            <span>Empirical ROI Simulator</span>
+            <span>{currentLang === 'vi' ? 'Mô phỏng ROI thực nghiệm' : 'Empirical ROI Simulator'}</span>
             <span aria-hidden="true" className="mx-2 text-stone-300 dark:text-zinc-700">·</span>
-            <span>Business Impact</span>
+            <span>{currentLang === 'vi' ? 'Tác động kinh doanh' : 'Business Impact'}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white text-balance">
             {currentLang === 'vi'
@@ -113,8 +117,8 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
                   onClick={resetDefaults}
                   type="button"
                   className="p-1.5 text-zinc-400 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
-                  title="Đặt lại mặc định"
-                  aria-label="Reset parameters"
+                  title={currentLang === 'vi' ? 'Đặt lại mặc định' : 'Reset parameters'}
+                  aria-label={currentLang === 'vi' ? 'Đặt lại thông số mặc định' : 'Reset parameters'}
                 >
                   <RefreshCw className="w-3.5 h-3.5" />
                 </button>
@@ -142,8 +146,8 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
                 className="w-full accent-orange-600 cursor-pointer"
               />
               <div className="flex justify-between text-[11px] text-zinc-400 font-mono">
-                <span>{currency === 'vnd' ? '200 Tr VNĐ' : '$8,000'}</span>
-                <span>{currency === 'vnd' ? '5 Tỷ VNĐ' : '$200,000'}</span>
+                <span>{currency === 'vnd' ? (currentLang === 'vi' ? '200 Tr VNĐ' : '200M VND') : '$8,000'}</span>
+                <span>{currency === 'vnd' ? (currentLang === 'vi' ? '5 Tỷ VNĐ' : '5B VND') : '$200,000'}</span>
               </div>
             </div>
 
@@ -168,8 +172,8 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
                 className="w-full accent-orange-600 cursor-pointer"
               />
               <div className="flex justify-between text-[11px] text-zinc-400 font-mono">
-                <span>10 xe</span>
-                <span>150 xe</span>
+                <span>{currentLang === 'vi' ? '10 xe' : '10 vehicles'}</span>
+                <span>{currentLang === 'vi' ? '150 xe' : '150 vehicles'}</span>
               </div>
             </div>
 
@@ -183,7 +187,7 @@ export const RoiSimulator: React.FC<RoiSimulatorProps> = ({ currentLang }) => {
                   -{wasteReductionRate}%
                 </div>
                 <div className="text-[10px] text-zinc-400 mt-0.5">
-                  {currentLang === 'vi' ? 'Đã kiểm chứng tại Viettel' : 'Viettel Logistics benchmark'}
+                  {currentLang === 'vi' ? 'Định mức thực tế tại Viettel Logistics' : 'Viettel Logistics benchmark'}
                 </div>
               </div>
 

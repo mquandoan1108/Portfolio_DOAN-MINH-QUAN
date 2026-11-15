@@ -34,20 +34,28 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
   const getDirectMailtoUrl = () => {
     const subject = encodeURIComponent(
-      `[Portfolio] Trao đổi công việc từ ${formData.name || 'Đối tác'}${formData.company ? ` (${formData.company})` : ''}`
+      currentLang === 'vi'
+        ? `[Portfolio] Trao đổi công việc từ ${formData.name || 'Đối tác'}${formData.company ? ` (${formData.company})` : ''}`
+        : `[Portfolio] Inquiry from ${formData.name || 'Partner'}${formData.company ? ` (${formData.company})` : ''}`
     );
     const body = encodeURIComponent(
-      `Chào anh Quân,\n\nTôi là: ${formData.name || '(Họ tên)'}\nEmail liên hệ: ${formData.email || '(Email)'}\nDoanh nghiệp / Tổ chức: ${formData.company || 'Cá nhân'}\n\nNội dung trao đổi:\n${formData.message || ''}\n\n---\n(Thư gửi từ Portfolio của Doan Minh Quan)`
+      currentLang === 'vi'
+        ? `Chào anh Quân,\n\nTôi là: ${formData.name || '(Họ tên)'}\nEmail liên hệ: ${formData.email || '(Email)'}\nDoanh nghiệp / Tổ chức: ${formData.company || 'Cá nhân'}\n\nNội dung trao đổi:\n${formData.message || ''}\n\n---\n(Thư gửi từ Portfolio của Đoàn Minh Quân)`
+        : `Hi Quan,\n\nName: ${formData.name || '(Name)'}\nEmail: ${formData.email || '(Email)'}\nCompany / Organization: ${formData.company || 'Individual'}\n\nMessage:\n${formData.message || ''}\n\n---\n(Sent from Doan Minh Quan Portfolio)`
     );
     return `mailto:doanminhquan1108@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const getDirectGmailUrl = () => {
     const subject = encodeURIComponent(
-      `[Portfolio] Trao đổi công việc từ ${formData.name || 'Đối tác'}${formData.company ? ` (${formData.company})` : ''}`
+      currentLang === 'vi'
+        ? `[Portfolio] Trao đổi công việc từ ${formData.name || 'Đối tác'}${formData.company ? ` (${formData.company})` : ''}`
+        : `[Portfolio] Inquiry from ${formData.name || 'Partner'}${formData.company ? ` (${formData.company})` : ''}`
     );
     const body = encodeURIComponent(
-      `Chào anh Quân,\n\nTôi là: ${formData.name || '(Họ tên)'}\nEmail liên hệ: ${formData.email || '(Email)'}\nDoanh nghiệp / Tổ chức: ${formData.company || 'Cá nhân'}\n\nNội dung trao đổi:\n${formData.message || ''}\n\n---\n(Thư gửi từ Portfolio của Doan Minh Quan)`
+      currentLang === 'vi'
+        ? `Chào anh Quân,\n\nTôi là: ${formData.name || '(Họ tên)'}\nEmail liên hệ: ${formData.email || '(Email)'}\nDoanh nghiệp / Tổ chức: ${formData.company || 'Cá nhân'}\n\nNội dung trao đổi:\n${formData.message || ''}\n\n---\n(Thư gửi từ Portfolio của Đoàn Minh Quân)`
+        : `Hi Quan,\n\nName: ${formData.name || '(Name)'}\nEmail: ${formData.email || '(Email)'}\nCompany / Organization: ${formData.company || 'Individual'}\n\nMessage:\n${formData.message || ''}\n\n---\n(Sent from Doan Minh Quan Portfolio)`
     );
     return `https://mail.google.com/mail/?view=cm&fs=1&to=doanminhquan1108@gmail.com&su=${subject}&body=${body}`;
   };
@@ -69,9 +77,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         body: JSON.stringify({
           name: formData.name.trim(),
           email: formData.email.trim(),
-          company: formData.company.trim() || 'Cá nhân / Đối tác',
+          company: formData.company.trim() || (currentLang === 'vi' ? 'Cá nhân / Đối tác' : 'Individual / Partner'),
           message: formData.message.trim(),
-          _subject: `[Portfolio Website] Tin nhắn mới từ ${formData.name.trim()} (${formData.company.trim() || 'Cá nhân'})`,
+          _subject: `[Portfolio Website] ${currentLang === 'vi' ? 'Tin nhắn mới từ' : 'New message from'} ${formData.name.trim()} (${formData.company.trim() || (currentLang === 'vi' ? 'Cá nhân' : 'Individual')})`,
           _template: 'table',
           _captcha: 'false',
         }),
@@ -119,9 +127,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         {/* Header */}
         <div className="max-w-3xl mb-12">
           <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 tracking-wide uppercase mb-2">
-            <span>Direct Channels</span>
+            <span>{currentLang === 'vi' ? 'Kênh liên hệ trực tiếp' : 'Direct Channels'}</span>
             <span aria-hidden="true" className="mx-2 text-stone-300 dark:text-zinc-700">·</span>
-            <span>Let's Connect</span>
+            <span>{currentLang === 'vi' ? 'Kết nối hợp tác' : "Let's Connect"}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white text-balance">
             {currentLang === 'vi' ? 'Liên Hệ Trực Tiếp & Kết Nối Cơ Hội' : 'Direct Contact & Professional Inquiries'}
@@ -158,7 +166,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 onClick={onCopyPhone}
                 type="button"
                 className="p-2 rounded-lg bg-stone-100 hover:bg-stone-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 border border-stone-200/80 dark:border-zinc-700/80 transition-colors text-xs font-medium flex items-center gap-1.5"
-                title="Sao chép số điện thoại"
+                title={currentLang === 'vi' ? 'Sao chép số điện thoại' : 'Copy phone number'}
               >
                 {phoneCopied ? <Check className="w-4 h-4 text-orange-600 dark:text-orange-400" /> : <Copy className="w-4 h-4" />}
                 <span className="hidden sm:inline">{phoneCopied ? (currentLang === 'vi' ? 'Đã chép' : 'Copied') : (currentLang === 'vi' ? 'Chép' : 'Copy')}</span>
@@ -184,7 +192,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 onClick={handleCopyEmail}
                 type="button"
                 className="p-2 rounded-lg bg-stone-100 hover:bg-stone-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 border border-stone-200/80 dark:border-zinc-700/80 transition-colors text-xs font-medium flex items-center gap-1.5"
-                title="Sao chép email"
+                title={currentLang === 'vi' ? 'Sao chép email' : 'Copy email'}
               >
                 {emailCopied ? <Check className="w-4 h-4 text-orange-600 dark:text-orange-400" /> : <Copy className="w-4 h-4" />}
                 <span className="hidden sm:inline">{emailCopied ? (currentLang === 'vi' ? 'Đã chép' : 'Copied') : (currentLang === 'vi' ? 'Chép' : 'Copy')}</span>
@@ -198,7 +206,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <ExternalLink className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs text-zinc-500 dark:text-zinc-400">LinkedIn Profile</div>
+                  <div className="text-xs text-zinc-500 dark:text-zinc-400">
+                    {currentLang === 'vi' ? 'Hồ sơ LinkedIn' : 'LinkedIn Profile'}
+                  </div>
                   <div className="text-sm font-bold text-zinc-900 dark:text-white font-mono">
                     linkedin.com/in/{PERSONAL_INFO.linkedinHandle}
                   </div>
@@ -223,7 +233,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               </div>
               <p className="leading-relaxed">
                 {currentLang === 'vi'
-                  ? 'Làm việc trực tiếp tại TP.HCM hoặc hybrid/remote với các dự án phân tích dữ liệu quy mô toàn quốc.'
+                  ? 'Làm việc trực tiếp tại TP.HCM hoặc kết hợp từ xa (hybrid/remote) với các dự án phân tích dữ liệu quy mô toàn quốc.'
                   : 'Based in Ho Chi Minh City, available for on-site, hybrid, and remote engagements nationwide.'}
               </p>
             </div>
@@ -351,7 +361,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="name@company.com"
+                      placeholder={currentLang === 'vi' ? 'ten@congty.com' : 'name@company.com'}
                       className="w-full px-3.5 py-2.5 rounded-lg bg-stone-50 dark:bg-zinc-950 border border-stone-300 dark:border-zinc-700 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 text-sm focus:border-orange-500 dark:focus:border-orange-400 focus:outline-hidden focus:ring-1 focus:ring-orange-500 transition-colors"
                     />
                   </div>
@@ -427,7 +437,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         href={getDirectMailtoUrl()}
                         className="inline-flex items-center gap-1 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white font-medium transition-colors"
                       >
-                        <span>{currentLang === 'vi' ? 'Mail Client' : 'Mail App'}</span>
+                        <span>{currentLang === 'vi' ? 'Ứng dụng Mail' : 'Mail App'}</span>
                       </a>
                     </div>
                   </div>

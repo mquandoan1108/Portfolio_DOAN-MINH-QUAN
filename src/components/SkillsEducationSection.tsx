@@ -19,9 +19,9 @@ export const SkillsEducationSection: React.FC<SkillsEducationSectionProps> = ({ 
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
           <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 tracking-wide uppercase mb-2">
-            <span>Competencies & Education</span>
+            <span>{currentLang === 'vi' ? 'Năng lực & Học vấn' : 'Competencies & Education'}</span>
             <span aria-hidden="true" className="mx-2 text-stone-300 dark:text-zinc-700">·</span>
-            <span>Academic Background</span>
+            <span>{currentLang === 'vi' ? 'Nền tảng đào tạo' : 'Academic Background'}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white text-balance">
             {currentLang === 'vi' ? 'Năng Lực Chuyên Môn & Nền Tảng Học Vấn' : 'Core Competencies & Academic Background'}
@@ -55,7 +55,7 @@ export const SkillsEducationSection: React.FC<SkillsEducationSectionProps> = ({ 
                     <div key={sIdx} className="space-y-1">
                       <div className="flex items-center justify-between text-sm">
                         <span className="font-semibold text-zinc-800 dark:text-zinc-200">
-                          {skill.name}
+                          {typeof skill.name === 'string' ? skill.name : skill.name[currentLang]}
                         </span>
                         <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
                           {skill.level[currentLang]}

@@ -30,7 +30,7 @@ export interface Project {
     vi: string;
     en: string;
   };
-  tools: string[];
+  tools: ({ vi: string; en: string } | string)[];
   metrics: {
     label: { vi: string; en: string };
     value: string | { vi: string; en: string };
@@ -64,7 +64,10 @@ export interface Experience {
     en: string;
   };
   company: string;
-  location: string;
+  location: {
+    vi: string;
+    en: string;
+  };
   period: {
     vi: string;
     en: string;
@@ -74,7 +77,7 @@ export interface Experience {
     vi: string[];
     en: string[];
   };
-  coreSkills: string[];
+  coreSkills: ({ vi: string; en: string } | string)[];
   metrics: {
     value: string;
     label: { vi: string; en: string };
@@ -87,7 +90,7 @@ export interface SkillCategory {
     en: string;
   };
   skills: {
-    name: string;
+    name: { vi: string; en: string } | string;
     level: {
       vi: string;
       en: string;

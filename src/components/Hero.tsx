@@ -27,9 +27,11 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenCv, onCopyPhone }
               
               {/* Clean Unboxed Kicker Metadata */}
               <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-orange-600 dark:text-orange-400 tracking-wide uppercase">
-                <span>Business Quality Control</span>
+                <span>
+                  {currentLang === 'vi' ? 'Kiểm soát Chất lượng Kinh doanh' : 'Business Quality Control'}
+                </span>
                 <span aria-hidden="true" className="text-stone-300 dark:text-zinc-700">/</span>
-                <span>Data Analytics</span>
+                <span>{currentLang === 'vi' ? 'Phân tích Dữ liệu' : 'Data Analytics'}</span>
                 <span aria-hidden="true" className="text-stone-300 dark:text-zinc-700">/</span>
                 <span>Viettel Logistics</span>
               </div>
@@ -80,7 +82,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenCv, onCopyPhone }
                 href="#projects"
                 className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-orange-600 hover:bg-orange-500 rounded-lg shadow-sm hover:shadow transition-all active:scale-[0.98]"
               >
-                <span>{currentLang === 'vi' ? 'Xem Dự Án Data' : 'Explore Data Projects'}</span>
+                <span>{currentLang === 'vi' ? 'Xem Dự Án Phân Tích' : 'Explore Data Projects'}</span>
                 <ArrowDown className="w-4 h-4" />
               </a>
 
@@ -110,7 +112,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenCv, onCopyPhone }
               {/* Portrait Image with Fallback Container */}
               <img
                 src={PERSONAL_INFO.heroImage}
-                alt={PERSONAL_INFO.name}
+                alt={currentLang === 'vi' ? 'Đoàn Minh Quân' : PERSONAL_INFO.name}
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                 onError={(e) => {
@@ -129,15 +131,25 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenCv, onCopyPhone }
                 <div className="w-24 h-24 rounded-full bg-orange-600/30 border border-orange-400/40 flex items-center justify-center text-3xl font-bold mb-4">
                   ĐMQ
                 </div>
-                <h3 className="text-xl font-bold">Đoàn Minh Quân</h3>
-                <p className="text-xs text-zinc-300 mt-1">Business Analyst & QC Manager</p>
+                <h3 className="text-xl font-bold">
+                  {currentLang === 'vi' ? 'Đoàn Minh Quân' : PERSONAL_INFO.name}
+                </h3>
+                <p className="text-xs text-zinc-300 mt-1">
+                  {PERSONAL_INFO.title[currentLang]}
+                </p>
               </div>
 
               {/* Bottom Scrim & Quick Contact Overlay */}
               <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-zinc-950/90 via-zinc-950/60 to-transparent flex items-end justify-between text-white">
                 <div>
-                  <div className="text-sm font-bold tracking-wide">ĐOÀN MINH QUÂN</div>
-                  <div className="text-xs text-zinc-300 font-medium">Business Quality Control Manager</div>
+                  <div className="text-sm font-bold tracking-wide">
+                    {currentLang === 'vi' ? 'ĐOÀN MINH QUÂN' : 'DOAN MINH QUAN'}
+                  </div>
+                  <div className="text-xs text-zinc-300 font-medium">
+                    {currentLang === 'vi'
+                      ? 'Trưởng bộ phận Chất lượng Kinh doanh'
+                      : 'Business Quality Control Manager'}
+                  </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <a
@@ -145,7 +157,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenCv, onCopyPhone }
                     target="_blank"
                     rel="noreferrer"
                     className="p-2 rounded-lg bg-white/10 hover:bg-orange-600/80 text-white transition-colors backdrop-blur-sm"
-                    title="LinkedIn Profile"
+                    title={currentLang === 'vi' ? 'Hồ sơ LinkedIn' : 'LinkedIn Profile'}
                     aria-label="LinkedIn"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -154,8 +166,8 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenCv, onCopyPhone }
                     onClick={onCopyPhone}
                     type="button"
                     className="p-2 rounded-lg bg-white/10 hover:bg-orange-600/80 text-white transition-colors backdrop-blur-sm"
-                    title="Copy Phone Number"
-                    aria-label="Copy phone"
+                    title={currentLang === 'vi' ? 'Sao chép số điện thoại' : 'Copy Phone Number'}
+                    aria-label={currentLang === 'vi' ? 'Sao chép số điện thoại' : 'Copy phone'}
                   >
                     <Phone className="w-3.5 h-3.5" />
                   </button>

@@ -22,7 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { href: '#about', label: currentLang === 'vi' ? 'Giới thiệu' : 'About' },
     { href: '#experience', label: currentLang === 'vi' ? 'Kinh nghiệm' : 'Experience' },
-    { href: '#projects', label: currentLang === 'vi' ? 'Dự án Data' : 'Projects' },
+    { href: '#projects', label: currentLang === 'vi' ? 'Dự án' : 'Projects' },
     { href: '#skills', label: currentLang === 'vi' ? 'Năng lực & Học vấn' : 'Competencies' },
     { href: '#roi-calculator', label: currentLang === 'vi' ? 'Mô phỏng ROI' : 'ROI Simulator' },
   ];
@@ -44,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             style={{ fontSize: '24px' }}
             className="font-bold tracking-tight text-zinc-900 dark:text-white whitespace-nowrap shrink-0 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
           >
-            ĐOÀN MINH QUÂN
+            {currentLang === 'vi' ? 'ĐOÀN MINH QUÂN' : 'DOAN MINH QUAN'}
           </a>
 
           {/* Zone 2: 4-5 concise single-line text navigation links */}
@@ -67,8 +67,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onToggleLang}
               type="button"
               className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-zinc-700 dark:text-zinc-200 bg-stone-100 hover:bg-stone-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-stone-200/80 dark:border-zinc-800 rounded-md transition-all active:scale-95 cursor-pointer shadow-xs whitespace-nowrap"
-              title={currentLang === 'en' ? 'Chuyển sang Tiếng Việt (Switch to Vietnamese)' : 'Switch to English (Chuyển sang tiếng Anh)'}
-              aria-label={currentLang === 'en' ? 'Switch to Vietnamese' : 'Chuyển sang tiếng Anh'}
+              title={currentLang === 'vi' ? 'Chuyển sang Tiếng Anh (EN)' : 'Switch to Vietnamese (VI)'}
+              aria-label={currentLang === 'vi' ? 'Chuyển sang Tiếng Anh' : 'Switch to Vietnamese'}
             >
               <Globe className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400" />
               <span>{currentLang === 'en' ? 'VI' : 'EN'}</span>
@@ -79,8 +79,24 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onToggleDark}
               type="button"
               className="p-2 text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white bg-stone-100 hover:bg-stone-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-stone-200/80 dark:border-zinc-800 rounded-md transition-all active:scale-95 cursor-pointer shadow-xs"
-              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-              title={isDark ? (currentLang === 'vi' ? 'Chuyển sang Chế độ sáng' : 'Switch to Light mode') : (currentLang === 'vi' ? 'Chuyển sang Chế độ tối' : 'Switch to Dark mode')}
+              aria-label={
+                currentLang === 'vi'
+                  ? isDark
+                    ? 'Chuyển sang chế độ sáng'
+                    : 'Chuyển sang chế độ tối'
+                  : isDark
+                    ? 'Switch to light mode'
+                    : 'Switch to dark mode'
+              }
+              title={
+                isDark
+                  ? currentLang === 'vi'
+                    ? 'Chuyển sang Chế độ sáng'
+                    : 'Switch to Light mode'
+                  : currentLang === 'vi'
+                    ? 'Chuyển sang Chế độ tối'
+                    : 'Switch to Dark mode'
+              }
             >
               {isDark ? (
                 <Sun className="w-4 h-4 text-orange-400 transition-transform hover:rotate-45" />
@@ -104,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
               className="lg:hidden p-2 text-zinc-600 dark:text-zinc-300 rounded-md hover:bg-stone-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-              aria-label="Open navigation menu"
+              aria-label={currentLang === 'vi' ? 'Mở menu điều hướng' : 'Open navigation menu'}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -132,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile Language Toggle */}
             <div className="flex items-center justify-between px-1">
               <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
-                {currentLang === 'vi' ? 'Ngôn ngữ (Language):' : 'Language (Ngôn ngữ):'}
+                {currentLang === 'vi' ? 'Ngôn ngữ:' : 'Language:'}
               </span>
               <button
                 onClick={onToggleLang}

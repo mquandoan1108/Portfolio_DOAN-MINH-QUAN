@@ -26,9 +26,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
 
   const categories = [
     { id: 'all', label: currentLang === 'vi' ? 'Tất cả dự án' : 'All Projects' },
-    { id: 'operations', label: 'Operations Analytics' },
-    { id: 'powerbi', label: 'Power BI & BI' },
-    { id: 'python', label: 'Python & EDA' },
+    { id: 'operations', label: currentLang === 'vi' ? 'Phân tích Vận hành' : 'Operations Analytics' },
+    { id: 'powerbi', label: currentLang === 'vi' ? 'Power BI & Báo cáo' : 'Power BI & BI' },
+    { id: 'python', label: currentLang === 'vi' ? 'Python & Khai phá' : 'Python & EDA' },
   ];
 
   const filteredProjects = selectedCategory === 'all'
@@ -47,9 +47,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
             <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 tracking-wide uppercase mb-2">
-              <span>Selected Case Studies</span>
+              <span>{currentLang === 'vi' ? 'Dự án tiêu biểu' : 'Selected Case Studies'}</span>
               <span aria-hidden="true" className="mx-2 text-stone-300 dark:text-zinc-700">·</span>
-              <span>Data Solutions</span>
+              <span>{currentLang === 'vi' ? 'Giải pháp dữ liệu' : 'Data Solutions'}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white text-balance">
               {currentLang === 'vi' ? 'Dự Án Phân Tích & Báo Cáo Thông Minh' : 'Analytics & Business Intelligence Projects'}
@@ -163,7 +163,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
                     {project.tools.slice(0, 3).map((tool, tIdx) => (
                       <React.Fragment key={tIdx}>
                         {tIdx > 0 && <span aria-hidden="true">/</span>}
-                        <span>{tool}</span>
+                        <span>{typeof tool === 'string' ? tool : tool[currentLang]}</span>
                       </React.Fragment>
                     ))}
                     {project.tools.length > 3 && (

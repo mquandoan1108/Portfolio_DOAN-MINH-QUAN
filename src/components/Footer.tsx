@@ -20,10 +20,10 @@ export const Footer: React.FC<FooterProps> = ({ currentLang }) => {
           {/* Brand & Copyright */}
           <div className="text-center sm:text-left space-y-1">
             <div className="font-bold text-zinc-900 dark:text-zinc-200 text-sm tracking-tight">
-              ĐOÀN MINH QUÂN
+              {currentLang === 'vi' ? 'ĐOÀN MINH QUÂN' : 'DOAN MINH QUAN'}
             </div>
             <p className="text-zinc-500 dark:text-zinc-500">
-              © {new Date().getFullYear()} {PERSONAL_INFO.name}. {currentLang === 'vi' ? 'Bảo lưu mọi quyền.' : 'All rights reserved.'}
+              © {new Date().getFullYear()} {currentLang === 'vi' ? 'Đoàn Minh Quân' : PERSONAL_INFO.name}. {currentLang === 'vi' ? 'Bảo lưu mọi quyền.' : 'All rights reserved.'}
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang }) => {
             onClick={scrollToTop}
             type="button"
             className="p-2 rounded-lg bg-white dark:bg-zinc-900 hover:bg-stone-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-orange-600 dark:hover:text-orange-400 border border-stone-200 dark:border-zinc-800 hover:border-orange-500/40 shadow-xs transition-colors cursor-pointer"
-            aria-label="Back to top"
+            aria-label={currentLang === 'vi' ? 'Lên đầu trang' : 'Back to top'}
             title={currentLang === 'vi' ? 'Lên đầu trang' : 'Back to top'}
           >
             <ArrowUp className="w-4 h-4" />

@@ -55,7 +55,7 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose, currentLang }
               onClick={onClose}
               type="button"
               className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-stone-100 dark:hover:bg-zinc-800 transition-colors"
-              aria-label="Close CV Modal"
+              aria-label={currentLang === 'vi' ? 'Đóng hồ sơ CV' : 'Close CV Modal'}
             >
               <X className="w-5 h-5" />
             </button>
@@ -70,7 +70,7 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose, currentLang }
             <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4">
               <div>
                 <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-                  ĐOÀN MINH QUÂN
+                  {currentLang === 'vi' ? 'ĐOÀN MINH QUÂN' : 'DOAN MINH QUAN'}
                 </h1>
                 <p className="text-base font-bold text-orange-600 dark:text-orange-400 print:text-orange-700 mt-1">
                   {PERSONAL_INFO.title[currentLang]}
@@ -136,7 +136,7 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose, currentLang }
                         {exp.role[currentLang]}
                       </h3>
                       <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 print:text-orange-700">
-                        {exp.company} · {exp.location}
+                        {exp.company} · {exp.location[currentLang]}
                       </div>
                     </div>
                     <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 print:text-zinc-600">
@@ -191,7 +191,7 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose, currentLang }
                     {cat.title[currentLang]}
                   </h4>
                   <p className="text-zinc-600 dark:text-zinc-400 print:text-zinc-700">
-                    {cat.skills.map((s) => s.name).join(' · ')}
+                    {cat.skills.map((s) => (typeof s.name === 'string' ? s.name : s.name[currentLang])).join(' · ')}
                   </p>
                 </div>
               ))}

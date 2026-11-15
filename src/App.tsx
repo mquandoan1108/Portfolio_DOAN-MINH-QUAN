@@ -46,10 +46,14 @@ export default function App() {
     }
   }, [isDark]);
 
-  // Sync html lang attribute and store preferred language
+  // Sync html lang attribute, document title, and store preferred language
   useEffect(() => {
     if (typeof window !== 'undefined') {
       document.documentElement.lang = currentLang;
+      document.title =
+        currentLang === 'vi'
+          ? 'Đoàn Minh Quân | Quản lý Chất lượng Kinh doanh & Phân tích Dữ liệu'
+          : 'Doan Minh Quan | Business Analyst & Quality Control Manager';
       localStorage.setItem('portfolio_lang', currentLang);
     }
   }, [currentLang]);
@@ -75,8 +79,8 @@ export default function App() {
       showToast(
         currentLang === 'vi'
           ? next
-            ? 'Đã chuyển sang Chế độ tối (Dark mode)'
-            : 'Đã chuyển sang Chế độ sáng (Light mode)'
+            ? 'Đã chuyển sang Chế độ tối'
+            : 'Đã chuyển sang Chế độ sáng'
           : next
             ? 'Switched to Dark mode'
             : 'Switched to Light mode'

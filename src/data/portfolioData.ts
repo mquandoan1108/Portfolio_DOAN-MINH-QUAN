@@ -10,7 +10,7 @@ import projectCovid19Img from '../assets/images/regenerated_image_1791802665500.
 export const PERSONAL_INFO = {
   name: 'Doan Minh Quan',
   title: {
-    vi: 'Business Quality Control Manager & Data Analyst',
+    vi: 'Trưởng bộ phận Chất lượng Kinh doanh & Phân tích Dữ liệu',
     en: 'Business Quality Control Manager & Data Analyst',
   },
   tagline: {
@@ -87,7 +87,10 @@ export const EXPERIENCES: Experience[] = [
       en: 'Business Quality Control Manager',
     },
     company: 'Viettel Logistics',
-    location: 'TP. Hồ Chí Minh',
+    location: {
+      vi: 'TP. Hồ Chí Minh',
+      en: 'Ho Chi Minh City',
+    },
     period: {
       vi: '04/2025 – Hiện tại',
       en: 'Apr 2025 – Present',
@@ -97,8 +100,8 @@ export const EXPERIENCES: Experience[] = [
       vi: [
         'Cố vấn chiến lược cho Ban Giám đốc trong việc định hình chiến lược lợi nhuận, tái cơ cấu và điều phối đội xe thương mại.',
         'Thiết lập hệ thống kiểm soát chất lượng dữ liệu chuyến xe, tự động phát hiện các điểm nghẽn hiệu suất và đề xuất kịch bản cải thiện theo thời gian thực.',
-        'Xây dựng Dashboard Business Intelligence (Power BI) tự động tích hợp hệ thống cảnh báo sớm, giúp cắt giảm 12% lãng phí chi phí vận hành.',
-        'Thẩm định hồ sơ doanh thu/chi phí khách hàng (P&L Simulation) trước khi ký kết hợp đồng thương mại, giúp nâng cao 4% biên lợi nhuận ban đầu.',
+        'Xây dựng Dashboard Power BI tự động tích hợp hệ thống cảnh báo sớm, giúp cắt giảm 12% lãng phí chi phí vận hành.',
+        'Thẩm định hồ sơ doanh thu/chi phí khách hàng (Mô phỏng P&L) trước khi ký kết hợp đồng thương mại, giúp nâng cao 4% biên lợi nhuận ban đầu.',
       ],
       en: [
         'Strategic advisor to the Executive Board on profitability optimization, fleet restructuring, and commercial asset allocation.',
@@ -107,7 +110,14 @@ export const EXPERIENCES: Experience[] = [
         'Conducted pre-deal financial feasibility and P&L simulations for commercial client contracts, boosting initial gross margin by 4%.',
       ],
     },
-    coreSkills: ['Business Intelligence', 'Power BI', 'P&L Modeling', 'Operational Quality Control', 'Executive Reporting', 'Fleet Strategy'],
+    coreSkills: [
+      { vi: 'Phân tích Kinh doanh (BI)', en: 'Business Intelligence' },
+      'Power BI',
+      { vi: 'Mô hình hóa P&L', en: 'P&L Modeling' },
+      { vi: 'Kiểm soát Chất lượng Vận hành', en: 'Operational Quality Control' },
+      { vi: 'Báo cáo Điều hành', en: 'Executive Reporting' },
+      { vi: 'Chiến lược Đội xe', en: 'Fleet Strategy' },
+    ],
     metrics: [
       {
         value: '-12%',
@@ -126,7 +136,10 @@ export const EXPERIENCES: Experience[] = [
       en: 'Fleet Team Leader',
     },
     company: 'Viettel Logistics',
-    location: 'TP. Hồ Chí Minh',
+    location: {
+      vi: 'TP. Hồ Chí Minh',
+      en: 'Ho Chi Minh City',
+    },
     period: {
       vi: '04/2024 – 04/2025',
       en: 'Apr 2024 – Apr 2025',
@@ -136,7 +149,7 @@ export const EXPERIENCES: Experience[] = [
         'Chỉ huy điều phối và giám sát vận hành kết nối chéo (cross-docking) giữa 15 chi nhánh tỉnh với lưu lượng hàng hóa cao.',
         'Đạt tỷ lệ hoàn thành KPI đội xe xuất sắc 99.65% (bao gồm chỉ số kết nối đúng giờ, định mức sử dụng tài sản xe và cam kết chất lượng dịch vụ SLA).',
         'Kiểm soát nghiêm ngặt định mức nhiên liệu và năng suất nhân sự tài xế, giúp tối ưu hóa 7% tổng ngân sách vận hành đội xe.',
-        'Tái thiết kế lộ trình vận chuyển (Route Optimization) nhằm loại bỏ tuyến trùng lặp, nâng cao 5% doanh thu vận tải trên từng tuyến.',
+        'Tái thiết kế và tối ưu hóa lộ trình vận chuyển nhằm loại bỏ tuyến trùng lặp, nâng cao 5% doanh thu vận tải trên từng tuyến.',
       ],
       en: [
         'Led and synchronized cross-docking logistics networks interconnecting 15 provincial distribution branches at high freight volumes.',
@@ -145,7 +158,14 @@ export const EXPERIENCES: Experience[] = [
         'Pioneered line-haul route restructuring, successfully eliminating transit deadheads and lifting route-specific gross revenue by 5%.',
       ],
     },
-    coreSkills: ['Fleet Dispatch', 'Cross-docking', 'Route Optimization', 'SLA Governance', 'Cost Accounting', 'Fuel Auditing'],
+    coreSkills: [
+      { vi: 'Điều phối Đội xe', en: 'Fleet Dispatch' },
+      'Cross-docking',
+      { vi: 'Tối ưu Tuyến đường', en: 'Route Optimization' },
+      { vi: 'Quản trị SLA', en: 'SLA Governance' },
+      { vi: 'Kiểm soát Chi phí', en: 'Cost Accounting' },
+      { vi: 'Kiểm toán Nhiên liệu', en: 'Fuel Auditing' },
+    ],
     metrics: [
       {
         value: '99.65%',
@@ -168,7 +188,10 @@ export const EXPERIENCES: Experience[] = [
       en: 'Airline Ground Operations Collaborator',
     },
     company: 'Saigon Ground Services (SAGS)',
-    location: 'TP. Hồ Chí Minh (Sân bay Quốc tế Tân Sơn Nhất)',
+    location: {
+      vi: 'TP. Hồ Chí Minh (Sân bay Quốc tế Tân Sơn Nhất)',
+      en: 'Ho Chi Minh City (Tan Son Nhat International Airport)',
+    },
     period: {
       vi: '07/2022 – 04/2024',
       en: 'Jul 2022 – Apr 2024',
@@ -185,7 +208,13 @@ export const EXPERIENCES: Experience[] = [
         'Collaborated with global airline representatives to handle flight delay contingencies, baggage escalations, and passenger resolution.',
       ],
     },
-    coreSkills: ['Aviation Ground Handling', 'SOP Quality Audit', 'Exception Management', 'Crisis Resolution', 'Service Quality Standards'],
+    coreSkills: [
+      { vi: 'Khai thác Mặt đất Hàng không', en: 'Aviation Ground Handling' },
+      { vi: 'Kiểm toán Quy trình SOP', en: 'SOP Quality Audit' },
+      { vi: 'Xử lý Ngoại lệ', en: 'Exception Management' },
+      { vi: 'Ứng phó Khủng hoảng', en: 'Crisis Resolution' },
+      { vi: 'Tiêu chuẩn Chất lượng Dịch vụ', en: 'Service Quality Standards' },
+    ],
     metrics: [
       {
         value: '100%',
@@ -212,16 +241,16 @@ export const PROJECTS: Project[] = [
       en: 'Consolidated 5 raw Excel data streams into Google Looker Studio to track real-time operations across 110 fleet vehicles, isolating 4 root causes of operational inefficiency.',
     },
     description: {
-      vi: 'Xây dựng hệ thống Dashboard hàng ngày (Daily Tracking Dashboard) tại Phòng Vận hành Kinh doanh (CNKT3), giám sát đa chiều: Doanh thu - Chi phí - Lợi nhuận theo mã khách hàng (MKH), tần suất phục vụ, chi phí xăng dầu/lương lái/vé cầu đường, và số km xe chạy rỗng theo từng chủng loại phương tiện (CONT, 8T, 5T, 2T).',
+      vi: 'Xây dựng Dashboard theo dõi hàng ngày tại Phòng Vận hành Kinh doanh (CNKT3), giám sát đa chiều: Doanh thu - Chi phí - Lợi nhuận theo mã khách hàng (MKH), tần suất phục vụ, chi phí xăng dầu/lương lái/vé cầu đường, và số km xe chạy rỗng theo từng chủng loại phương tiện (CONT, 8T, 5T, 2T).',
       en: 'Engineered a daily tracking dashboard in Looker Studio for Branch Operations (CNKT3), monitoring multi-dimensional metrics: Revenue, Costs, and Profit margins per customer code (MKH), trip frequency, fuel and driver payroll expenditure, and empty-km deadheads across vehicle types (CONT, 8T, 5T, 2T).',
     },
     tools: [
       'Google Looker Studio',
-      '5x Excel Data Pipelines',
-      'Data Cleansing & ETL',
-      'Logistics P&L Modeling',
-      'Root Cause Analysis (RCA)',
-      'Fleet Telemetry',
+      { vi: '5 Luồng Dữ liệu Excel', en: '5x Excel Data Pipelines' },
+      { vi: 'Làm sạch Dữ liệu & ETL', en: 'Data Cleansing & ETL' },
+      { vi: 'Mô hình P&L Logistics', en: 'Logistics P&L Modeling' },
+      { vi: 'Phân tích Nguyên nhân Gốc rễ', en: 'Root Cause Analysis (RCA)' },
+      { vi: 'Dữ liệu Hành trình Đội xe', en: 'Fleet Telemetry' },
     ],
     metrics: [
       { label: { vi: 'Quy mô đội xe giám sát', en: 'Fleet Scope' }, value: { vi: '110 Xe', en: '110 Multi-ton Trucks' } },
@@ -229,21 +258,21 @@ export const PROJECTS: Project[] = [
       { label: { vi: 'Tần suất giám sát', en: 'Tracking Cadence' }, value: { vi: 'Hàng ngày', en: 'Daily' } },
     ],
     challenge: {
-      vi: '1. Situation & Task: Ban quản trị cần theo dõi dữ liệu tài chính lũy kế song song với dữ liệu vận hành theo thời gian thực nhằm phát hiện các đột biến chi phí bất thường, nhận diện khách hàng không sinh lời và tối ưu hóa hiệu suất đội xe. Dữ liệu thô phân tán tại 5 tệp Excel riêng lẻ, gây khó khăn cho việc đánh giá tần suất dịch vụ, chi phí trên từng mã khách hàng (MKH) và các chuyến xe đang chạy theo từng loại phương tiện.',
-      en: '1. Situation & Task: Objective to track cumulative corporate financial data alongside real-time operational data to detect unusual cost spikes, identify unprofitable customer codes, and optimize overall fleet performance. Key focus areas spanned revenue, service costs, profitability, and trip frequency across vehicle types, with raw records fragmented across 5 disparate Excel files.',
+      vi: 'Ban quản trị cần theo dõi dữ liệu tài chính lũy kế song song với dữ liệu vận hành theo thời gian thực nhằm phát hiện đột biến chi phí, nhận diện khách hàng chưa sinh lời và tối ưu hiệu suất đội xe. Dữ liệu thô phân tán tại 5 tệp Excel riêng lẻ gây khó khăn cho việc đánh giá tần suất phục vụ, chi phí trên từng mã khách hàng (MKH) và các chuyến xe đang chạy theo từng loại phương tiện.',
+      en: 'Leadership needed to track cumulative financial metrics alongside real-time operational data to detect cost spikes, identify unprofitable customer codes, and optimize fleet performance across revenue, service costs, profitability, and trip frequency—while raw records remained fragmented across 5 separate Excel files.',
     },
     solution: {
-      vi: '2. Action: Tổng hợp và làm sạch nghiêm ngặt dữ liệu thô từ 5 nguồn Excel độc lập. Tích hợp tập dữ liệu vào Google Looker Studio để xây dựng Dashboard theo dõi hàng ngày (Daily Tracking Dashboard) với các phân hệ: Chi phí tổng thể (Dầu - Vé - Lương), Khách hàng phân phối & Km rỗng, Chuyến xe đang kết nối, và Bóc tách chi tiết theo loại xe (CONT, 8T, 5813T, 2T).',
-      en: '2. Action: Consolidated and rigorously cleaned raw records from 5 separate Excel sources. Integrated the unified dataset into Google Looker Studio to engineer a dynamic daily tracking dashboard featuring automated insights, empty-km diagnostics, active trip connection times, and granular fleet segmentation (CONT, 8T, 5T, 2T).',
+      vi: 'Tổng hợp và làm sạch nghiêm ngặt dữ liệu thô từ 5 nguồn Excel độc lập, sau đó tích hợp lên Google Looker Studio để xây dựng Dashboard theo dõi hàng ngày với các phân hệ: Chi phí tổng thể (Dầu - Vé - Lương), Phân bố khách hàng & Km rỗng, Chuyến xe đang kết nối và Bóc tách chi tiết theo chủng loại xe (CONT, 8T, 5T, 2T).',
+      en: 'Consolidated and rigorously cleaned raw records from 5 separate Excel sources into Google Looker Studio to engineer a daily executive tracking dashboard featuring cost breakdowns, empty-km diagnostics, active trip connection monitoring, and granular fleet segmentation (CONT, 8T, 5T, 2T).',
     },
     impact: {
-      vi: '3. Results & Root Cause Analysis: Cung cấp góc nhìn minh bạch tức thì cho ban lãnh đạo và chỉ ra 4 nguyên nhân cốt lõi gây sụt giảm hiệu quả vận hành: (1) Pricing Deficits: Đơn giá cước thấp hơn chi phí thực tế; (2) High Cost Baselines: Định mức chi phí nội bộ còn cao; (3) Scale Imbalance: Mô hình sinh lời có quy mô nhỏ hơn mô hình thua lỗ; (4) Resource Wasted & Opportunity Costs: Lãng phí km rỗng không tạo doanh thu.',
-      en: '3. Results & Root Cause Analysis: Delivered instantaneous executive transparency and diagnosed four root causes of margin leakage: (1) Pricing Deficits (service rates lower than true operating expenses); (2) High Cost Baselines (elevated internal benchmarks); (3) Scale Imbalance (profitable services operating at sub-scale); (4) Resource Waste & Opportunity Costs (excess empty kilometers and unmonetized transit legs).',
+      vi: 'Cung cấp góc nhìn minh bạch tức thì cho Ban lãnh đạo và chỉ ra 4 nguyên nhân gốc rễ gây sụt giảm hiệu quả vận hành: (1) Thâm hụt đơn giá dịch vụ so với chi phí thực tế; (2) Định mức chi phí nội bộ còn cao; (3) Mất cân đối quy mô giữa mô hình sinh lời và mô hình thua lỗ; (4) Lãng phí km chạy rỗng không tạo doanh thu.',
+      en: 'Delivered instantaneous executive transparency and diagnosed four root causes of margin leakage: (1) Pricing deficits where service rates fell below true operating expenses; (2) Elevated internal cost baselines; (3) Scale imbalance between profitable and loss-making lanes; (4) Resource waste from empty kilometers.',
     },
     keyFindings: [
       {
         title: {
-          vi: '1. Thâm hụt đơn giá dịch vụ (Pricing Deficits)',
+          vi: '1. Thâm hụt đơn giá dịch vụ',
           en: '1. Pricing Deficits',
         },
         detail: {
@@ -251,13 +280,13 @@ export const PROJECTS: Project[] = [
           en: 'Service pricing is currently lower than actual operating costs, resulting in cumulative losses over time.',
         },
         action: {
-          vi: 'Hành động yêu cầu: Khẩn trương rà soát toàn diện bảng giá cước dịch vụ và đàm phán lại mức giá cơ sở với khách hàng.',
+          vi: 'Hành động đề xuất: Khẩn trương rà soát toàn diện bảng giá cước dịch vụ và đàm phán lại mức giá cơ sở với khách hàng.',
           en: 'Action required: Comprehensive service pricing review and baseline contract rate renegotiation.',
         },
       },
       {
         title: {
-          vi: '2. Định mức chi phí nội bộ cao (High Cost Baselines)',
+          vi: '2. Định mức chi phí nội bộ cao',
           en: '2. High Cost Baselines',
         },
         detail: {
@@ -265,13 +294,13 @@ export const PROJECTS: Project[] = [
           en: 'Internal cost standards remain elevated, hindering maximum expense optimization across fleet routes.',
         },
         action: {
-          vi: 'Hành động yêu cầu: Siết chặt và tái đánh giá lại các quy chuẩn, định mức chi phí nội bộ trên từng loại xe.',
+          vi: 'Hành động đề xuất: Siết chặt và tái đánh giá lại các quy chuẩn, định mức chi phí nội bộ trên từng loại xe.',
           en: 'Action required: Tighten and re-evaluate internal cost standards and consumption benchmarks.',
         },
       },
       {
         title: {
-          vi: '3. Mất cân đối quy mô mô hình (Scale Imbalance)',
+          vi: '3. Mất cân đối quy mô mô hình',
           en: '3. Scale Imbalance',
         },
         detail: {
@@ -279,21 +308,21 @@ export const PROJECTS: Project[] = [
           en: 'The profitable business model operates on a smaller scale than the loss-making model.',
         },
         action: {
-          vi: 'Hành động yêu cầu: Tăng tốc mở rộng quy mô các mô hình và tuyến dịch vụ có lợi nhuận để cải thiện biên lợi nhuận gộp toàn diện.',
+          vi: 'Hành động đề xuất: Tăng tốc mở rộng quy mô các mô hình và tuyến dịch vụ có lợi nhuận để cải thiện biên lợi nhuận gộp toàn diện.',
           en: 'Action required: Scale up profitable logistics models and high-margin lanes to boost overall company margins.',
         },
       },
       {
         title: {
-          vi: '4. Lãng phí tài nguyên & Chi phí cơ hội (Resource Wasted & Opportunity Costs)',
-          en: '4. Resource Wasted & Opportunity Costs',
+          vi: '4. Lãng phí tài nguyên & Chi phí cơ hội',
+          en: '4. Resource Waste & Opportunity Costs',
         },
         detail: {
           vi: 'Xảy ra các khoản chi phí lãng phí và vận hành kém hiệu quả (như số km xe chạy rỗng cao, thời gian chờ quay đầu) mà không tạo ra doanh thu bù đắp.',
           en: 'Operational inefficiencies and wasted expenses (elevated empty kilometers) occur without generating offsetting revenues.',
         },
         action: {
-          vi: 'Hành động yêu cầu: Đảm bảo năng lực tạo doanh thu xuyên suốt toàn bộ quy trình vận hành và hạn chế tối đa các chuyến chạy rỗng.',
+          vi: 'Hành động đề xuất: Đảm bảo năng lực tạo doanh thu xuyên suốt toàn bộ quy trình vận hành và hạn chế tối đa các chuyến chạy rỗng.',
           en: 'Action required: Ensure revenue generation across the entire operational workflow and eliminate redundant deadheads.',
         },
       },
@@ -304,8 +333,8 @@ export const PROJECTS: Project[] = [
         id: 'builtin-overview',
         src: projectLookerVhkdImg,
         label: {
-          vi: '/Overview/ — Tổng quan Doanh thu, CP & Lợi nhuận',
-          en: '/Overview/ — Revenue, Cost & Margin Overview',
+          vi: 'Tổng quan — Doanh thu, Chi phí & Lợi nhuận',
+          en: 'Overview — Revenue, Cost & Margin',
         },
         isCustom: false,
       },
@@ -315,7 +344,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'proj-3',
     title: {
-      vi: 'Logistics Fleet Dispatch & Network Route Optimization',
+      vi: 'Điều Phối Đội Xe Logistics & Tối Ưu Hóa Mạng Lưới Tuyến Đường',
       en: 'Logistics Fleet Dispatch & Network Route Optimization',
     },
     category: 'operations',
@@ -331,7 +360,13 @@ export const PROJECTS: Project[] = [
       vi: 'Phân tích dữ liệu GPS chuyến xe, giờ chạy liên tỉnh và lịch trình chuyển tải kho bãi để thiết kế lại ma trận kết nối cross-docking. Kết hợp thuật toán tối ưu hóa tuyến đường giúp giảm thời gian quay đầu xe và tiết kiệm định mức nhiên liệu.',
       en: 'Analyzed GPS telemetry logs, transit schedules, and hub dwell times to reconfigure cross-docking routing matrices. Applied route heuristic modeling to cut vehicle turnaround times and curtail diesel burn.',
     },
-    tools: ['Python', 'Fleet Telemetry', 'Route Optimization', 'Excel Solver', 'SLA Framework'],
+    tools: [
+      'Python',
+      { vi: 'Dữ liệu Hành trình Đội xe', en: 'Fleet Telemetry' },
+      { vi: 'Tối ưu Tuyến đường', en: 'Route Optimization' },
+      'Excel Solver',
+      { vi: 'Khung Quản trị SLA', en: 'SLA Framework' },
+    ],
     metrics: [
       { label: { vi: 'Độ phủ mạng lưới', en: 'Network Hubs' }, value: { vi: '15 Chi nhánh tỉnh', en: '15 Provincial Hubs' } },
       { label: { vi: 'SLA Cam kết', en: 'On-time SLA' }, value: { vi: '99.65% Đạt chuẩn', en: '99.65% SLA Rate' } },
@@ -355,7 +390,7 @@ export const PROJECTS: Project[] = [
         id: 'builtin-logistics-route',
         src: projectLogisticsRouteImg,
         label: {
-          vi: 'Logistics Fleet Dispatch & Network Route Optimization',
+          vi: 'Điều Phối Đội Xe Logistics & Tối Ưu Hóa Mạng Lưới Tuyến Đường',
           en: 'Logistics Fleet Dispatch & Network Route Optimization',
         },
         isCustom: false,
@@ -366,7 +401,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'proj-1',
     title: {
-      vi: 'Business Performance & P&L Executive Dashboard',
+      vi: 'Dashboard Điều Hành Hiệu Suất Kinh Doanh & Lợi Nhuận P&L (Power BI)',
       en: 'Business Performance & P&L Executive Dashboard',
     },
     category: 'powerbi',
@@ -382,7 +417,13 @@ export const PROJECTS: Project[] = [
       vi: 'Dự án xây dựng mô hình dữ liệu tài chính hợp nhất từ nhiều nguồn dữ liệu vận hành. Bằng việc xây dựng các thước đo DAX nâng cao và trực quan hóa P&L Waterfall, hệ thống cung cấp góc nhìn tức thời về hiệu quả kinh doanh theo từng chi nhánh, tuyến vận chuyển và khách hàng trọng điểm.',
       en: 'Architected a consolidated financial data model pulling from multi-branch ERP databases. Leveraging advanced DAX measures and P&L Waterfall visualizations, this tool gives leadership instantaneous visibility into profit margins across routes, regional hubs, and enterprise accounts.',
     },
-    tools: ['Power BI', 'DAX', 'Power Query', 'Financial P&L Modeling', 'Data Cleansing'],
+    tools: [
+      'Power BI',
+      'DAX',
+      'Power Query',
+      { vi: 'Mô hình Tài chính P&L', en: 'Financial P&L Modeling' },
+      { vi: 'Làm sạch Dữ liệu', en: 'Data Cleansing' },
+    ],
     metrics: [
       { label: { vi: 'Chu kỳ lập báo cáo', en: 'Reporting Cycle' }, value: { vi: 'Tự động 100%', en: '100% Automated' } },
       { label: { vi: 'Phát hiện rò rỉ chi phí', en: 'Cost Leak Detection' }, value: { vi: '-12% Lãng phí', en: '-12% Waste' } },
@@ -406,7 +447,7 @@ export const PROJECTS: Project[] = [
         id: 'builtin-bi-performance',
         src: projectBiPerformanceImg,
         label: {
-          vi: 'Business Performance & P&L Executive Dashboard',
+          vi: 'Dashboard Điều Hành Hiệu Suất Kinh Doanh & Lợi Nhuận P&L (Power BI)',
           en: 'Business Performance & P&L Executive Dashboard',
         },
         isCustom: false,
@@ -417,7 +458,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'proj-2',
     title: {
-      vi: 'HR Employee Attrition & Retention Analytics',
+      vi: 'Phân Tích Biến Động Nhân Sự & Chiến Lược Giữ Chân Nhân Tài (Power BI)',
       en: 'HR Employee Attrition & Retention Analytics',
     },
     category: 'powerbi',
@@ -430,10 +471,16 @@ export const PROJECTS: Project[] = [
       en: 'Multivariate people analytics model decoding the root causes of employee turnover, identifying flight-risk departments, and driving data-backed talent retention strategies.',
     },
     description: {
-      vi: 'Nghiên cứu bộ dữ liệu nhân sự toàn diện bao gồm độ tuổi, mức lương, thời gian gắn bó, điểm số hài lòng công việc và khối lượng công việc ngoài giờ. Thiết kế Dashboard trực quan với các chỉ số Attrition Rate theo phòng ban và mô hình dự báo rủi ro.',
+      vi: 'Nghiên cứu bộ dữ liệu nhân sự toàn diện bao gồm độ tuổi, mức lương, thời gian gắn bó, điểm số hài lòng công việc và khối lượng công việc ngoài giờ. Thiết kế Dashboard trực quan với tỷ lệ nghỉ việc theo phòng ban và mô hình dự báo rủi ro.',
       en: 'Investigated a comprehensive workforce dataset including tenure, compensation bands, satisfaction indexes, overtime loads, and job role tiers. Built an intuitive dashboard isolating turnover correlation factors and flight-risk patterns.',
     },
-    tools: ['Power BI', 'DAX Measures', 'Correlation Analysis', 'HR Data Modeling', 'Interactive Slicers'],
+    tools: [
+      'Power BI',
+      { vi: 'Hàm DAX Nâng cao', en: 'DAX Measures' },
+      { vi: 'Phân tích Tương quan', en: 'Correlation Analysis' },
+      { vi: 'Mô hình Dữ liệu Nhân sự', en: 'HR Data Modeling' },
+      { vi: 'Bộ lọc Tương tác', en: 'Interactive Slicers' },
+    ],
     metrics: [
       { label: { vi: 'Tổng số nhân sự', en: 'Total Employees' }, value: { vi: '1,470 Nhân sự', en: '1,470 Employees' } },
       { label: { vi: 'Tỷ lệ biến động', en: 'Attrition Rate' }, value: { vi: '16% (237 ca)', en: '16% (237 Cases)' } },
@@ -457,7 +504,7 @@ export const PROJECTS: Project[] = [
         id: 'builtin-hr-attrition',
         src: projectHrAttritionImg,
         label: {
-          vi: 'HR Employee Attrition & Retention Analytics',
+          vi: 'Phân Tích Biến Động Nhân Sự & Chiến Lược Giữ Chân Nhân Tài (Power BI)',
           en: 'HR Employee Attrition & Retention Analytics',
         },
         isCustom: false,
@@ -468,7 +515,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'proj-5',
     title: {
-      vi: 'Supermarket Sales & Customer Basket Behavior Analysis',
+      vi: 'Phân Tích Doanh Số Siêu Thị & Hành Vi Giỏ Hàng Khách Hàng',
       en: 'Supermarket Sales & Customer Basket Behavior Analysis',
     },
     category: 'python',
@@ -481,12 +528,18 @@ export const PROJECTS: Project[] = [
       en: 'Deep-dive into supermarket consumer transaction behavior, extracting cross-sell product affinities and optimizing inventory stocking levels.',
     },
     description: {
-      vi: 'Sử dụng kỹ thuật phân tích giỏ hàng và phân nhóm khách hàng (RFM concepts) để đánh giá doanh số theo từng danh mục hàng hóa, giờ mua sắm cao điểm và phương thức thanh toán.',
+      vi: 'Sử dụng kỹ thuật phân tích giỏ hàng và phân nhóm khách hàng (mô hình RFM) để đánh giá doanh số theo từng danh mục hàng hóa, giờ mua sắm cao điểm và phương thức thanh toán.',
       en: 'Utilized market basket analysis and RFM customer segmentation heuristics to evaluate sales velocities across product categories, peak checkout hours, and preferred payment channels.',
     },
-    tools: ['Python', 'Power BI', 'Market Basket Analysis', 'Customer Segmentation', 'Inventory Analytics'],
+    tools: [
+      'Python',
+      'Power BI',
+      { vi: 'Phân tích Giỏ hàng', en: 'Market Basket Analysis' },
+      { vi: 'Phân khúc Khách hàng', en: 'Customer Segmentation' },
+      { vi: 'Phân tích Tồn kho', en: 'Inventory Analytics' },
+    ],
     metrics: [
-      { label: { vi: 'Khối lượng đơn hàng', en: 'Transaction Records' }, value: { vi: 'Hàng chục ngàn SKU', en: '10,000+ SKUs' } },
+      { label: { vi: 'Khối lượng đơn hàng', en: 'Transaction Records' }, value: { vi: '10,000+ Mã hàng (SKU)', en: '10,000+ SKUs' } },
       { label: { vi: 'Ứng dụng', en: 'Application' }, value: { vi: 'Xếp đặt & Khuyến mãi', en: 'Merchandising' } },
       { label: { vi: 'Kết quả', en: 'Outcome' }, value: { vi: 'Tối ưu tồn kho', en: 'Stock Optimized' } },
     ],
@@ -508,7 +561,7 @@ export const PROJECTS: Project[] = [
         id: 'builtin-supermarket-basket',
         src: projectBiDashboardImg,
         label: {
-          vi: 'Supermarket Sales & Customer Basket Behavior Analysis',
+          vi: 'Phân Tích Doanh Số Siêu Thị & Hành Vi Giỏ Hàng Khách Hàng',
           en: 'Supermarket Sales & Customer Basket Behavior Analysis',
         },
         isCustom: false,
@@ -518,7 +571,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'proj-4',
     title: {
-      vi: 'COVID-19 Global Socioeconomic Impact & GDP EDA',
+      vi: 'Phân Tích Tác Động Kinh Tế - Xã Hội COVID-19 & Tăng Trưởng GDP Toàn Cầu',
       en: 'COVID-19 Global Socioeconomic Impact & GDP EDA',
     },
     category: 'python',
@@ -534,7 +587,14 @@ export const PROJECTS: Project[] = [
       vi: 'Ứng dụng Python (Pandas, NumPy, Matplotlib, Seaborn) xử lý tập dữ liệu hàng triệu bản ghi, xử lý giá trị khuyết thiếu và ngoại lai. Xây dựng ma trận tương quan và biểu đồ hồi quy chứng minh tác động phi tuyến tính giữa hạn chế đi lại và tốc độ suy giảm kinh tế.',
       en: 'Employed Python (Pandas, NumPy, Matplotlib, Seaborn) to clean millions of country-level records, handling outliers and missing longitudinal data. Built correlation heatmaps and regression models examining non-linear macroeconomic shocks.',
     },
-    tools: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Statistical Modeling'],
+    tools: [
+      'Python',
+      'Pandas',
+      'NumPy',
+      'Matplotlib',
+      'Seaborn',
+      { vi: 'Mô hình hóa Thống kê', en: 'Statistical Modeling' },
+    ],
     metrics: [
       { label: { vi: 'Dữ liệu phân tích', en: 'Data Source' }, value: 'Our World in Data' },
       { label: { vi: 'Phạm vi quốc gia', en: 'Geographic Scope' }, value: { vi: '180+ Quốc gia', en: '180+ Countries' } },
@@ -545,7 +605,7 @@ export const PROJECTS: Project[] = [
       en: 'Raw global public datasets suffered from severe temporal gaps, regional reporting variances, and heterogeneous indicator definitions.',
     },
     solution: {
-      vi: 'Xây dựng pipeline làm sạch dữ liệu tự động, nội suy chuỗi thời gian hợp lý và chuẩn hóa các chỉ số Stringency Index theo thang đo đồng nhất.',
+      vi: 'Xây dựng quy trình làm sạch dữ liệu tự động, nội suy chuỗi thời gian hợp lý và chuẩn hóa chỉ số mức độ giãn cách (Stringency Index) theo thang đo đồng nhất.',
       en: 'Constructed automated data cleaning pipelines, applied robust time-series interpolation, and standardized the government Stringency Index scale.',
     },
     impact: {
@@ -558,7 +618,7 @@ export const PROJECTS: Project[] = [
         id: 'builtin-covid-eda',
         src: projectCovid19Img,
         label: {
-          vi: 'COVID-19 Global Socioeconomic Impact & GDP EDA',
+          vi: 'Phân Tích Tác Động Kinh Tế - Xã Hội COVID-19 & Tăng Trưởng GDP Toàn Cầu',
           en: 'COVID-19 Global Socioeconomic Impact & GDP EDA',
         },
         isCustom: false,
@@ -575,7 +635,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     },
     skills: [
       {
-        name: 'Logistics & Fleet Operations',
+        name: {
+          vi: 'Quản trị Vận hành Logistics & Đội xe',
+          en: 'Logistics & Fleet Operations',
+        },
         level: {
           vi: 'Chuyên sâu',
           en: 'Mastered',
@@ -586,7 +649,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         },
       },
       {
-        name: 'Business Quality Control Frameworks',
+        name: {
+          vi: 'Khung Kiểm soát Chất lượng Kinh doanh',
+          en: 'Business Quality Control Frameworks',
+        },
         level: {
           vi: 'Chuyên sâu',
           en: 'Mastered',
@@ -597,7 +663,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         },
       },
       {
-        name: 'Cost Optimization & P&L Management',
+        name: {
+          vi: 'Tối ưu Chi phí & Quản trị Lợi nhuận (P&L)',
+          en: 'Cost Optimization & P&L Management',
+        },
         level: {
           vi: 'Nâng cao',
           en: 'Advanced',
@@ -608,7 +677,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         },
       },
       {
-        name: 'Route Planning & Network Design',
+        name: {
+          vi: 'Hoạch định Tuyến đường & Thiết kế Mạng lưới',
+          en: 'Route Planning & Network Design',
+        },
         level: {
           vi: 'Nâng cao',
           en: 'Advanced',
@@ -649,7 +721,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         },
       },
       {
-        name: 'Advanced Excel & Power Query',
+        name: {
+          vi: 'Excel Nâng cao & Power Query',
+          en: 'Advanced Excel & Power Query',
+        },
         level: {
           vi: 'Chuyên sâu',
           en: 'Expert',
@@ -660,7 +735,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         },
       },
       {
-        name: 'Google Looker Studio & Data Visualization',
+        name: {
+          vi: 'Google Looker Studio & Trực quan hóa Dữ liệu',
+          en: 'Google Looker Studio & Data Visualization',
+        },
         level: {
           vi: 'Nâng cao',
           en: 'Advanced',
@@ -679,7 +757,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     },
     skills: [
       {
-        name: 'Exploratory Data Analysis (EDA)',
+        name: {
+          vi: 'Phân tích Khai phá Dữ liệu (EDA)',
+          en: 'Exploratory Data Analysis (EDA)',
+        },
         level: {
           vi: 'Chuyên sâu',
           en: 'Expert',
@@ -690,7 +771,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         },
       },
       {
-        name: 'Root Cause Analysis (5 Whys / Fishbone)',
+        name: {
+          vi: 'Phân tích Nguyên nhân Gốc rễ (5 Whys / Fishbone)',
+          en: 'Root Cause Analysis (5 Whys / Fishbone)',
+        },
         level: {
           vi: 'Chuyên sâu',
           en: 'Expert',
@@ -701,7 +785,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         },
       },
       {
-        name: 'Aviation Ground Handling Standards',
+        name: {
+          vi: 'Tiêu chuẩn Khai thác Mặt đất Hàng không',
+          en: 'Aviation Ground Handling Standards',
+        },
         level: {
           vi: 'Đã chứng nhận',
           en: 'Certified',
@@ -712,7 +799,10 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         },
       },
       {
-        name: 'Cross-functional Leadership',
+        name: {
+          vi: 'Lãnh đạo & Phối hợp Liên phòng ban',
+          en: 'Cross-functional Leadership',
+        },
         level: {
           vi: 'Nâng cao',
           en: 'Advanced',
