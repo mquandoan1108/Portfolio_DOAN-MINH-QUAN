@@ -12,21 +12,21 @@ export const SkillsEducationSection: React.FC<SkillsEducationSectionProps> = ({ 
     <section
       id="skills"
       style={{ fontFamily: 'system-ui' }}
-      className="py-16 lg:py-24 border-b border-slate-200/80 dark:border-slate-800/80"
+      className="py-16 lg:py-24 border-b border-stone-200/80 dark:border-zinc-800/80"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="text-xs font-semibold text-sky-700 dark:text-sky-400 tracking-wide uppercase mb-2">
+          <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 tracking-wide uppercase mb-2">
             <span>Competencies & Education</span>
-            <span aria-hidden="true" className="mx-2 text-slate-300 dark:text-slate-700">·</span>
+            <span aria-hidden="true" className="mx-2 text-stone-300 dark:text-zinc-700">·</span>
             <span>Academic Background</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white text-balance">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white text-balance">
             {currentLang === 'vi' ? 'Năng Lực Chuyên Môn & Nền Tảng Học Vấn' : 'Core Competencies & Academic Background'}
           </h2>
-          <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
+          <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
             {currentLang === 'vi'
               ? 'Sự kết hợp giữa tư duy chuẩn mực của ngành Hàng không và kỹ năng phân tích dữ liệu thực chiến trong ngành Logistics.'
               : 'Synthesizing rigorous aviation operational standards with hands-on data analytics and supply chain logistics.'}
@@ -41,11 +41,11 @@ export const SkillsEducationSection: React.FC<SkillsEducationSectionProps> = ({ 
             {SKILL_CATEGORIES.map((category, catIdx) => (
               <div
                 key={catIdx}
-                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-xs"
+                className="bg-white dark:bg-zinc-900 rounded-2xl border border-stone-200 dark:border-zinc-800 p-6 shadow-xs"
               >
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-4 pb-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <h3 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-wider mb-4 pb-3 border-b border-stone-100 dark:border-zinc-800 flex items-center justify-between">
                   <span>{category.title[currentLang]}</span>
-                  <span className="text-xs font-normal text-sky-600 dark:text-sky-400 font-mono">
+                  <span className="text-xs font-normal text-orange-600 dark:text-orange-400 font-mono">
                     0{catIdx + 1}
                   </span>
                 </h3>
@@ -54,14 +54,14 @@ export const SkillsEducationSection: React.FC<SkillsEducationSectionProps> = ({ 
                   {category.skills.map((skill, sIdx) => (
                     <div key={sIdx} className="space-y-1">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                        <span className="font-semibold text-zinc-800 dark:text-zinc-200">
                           {skill.name}
                         </span>
-                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                        <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
                           {skill.level[currentLang]}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
                         {skill.context[currentLang]}
                       </p>
                     </div>
@@ -75,49 +75,49 @@ export const SkillsEducationSection: React.FC<SkillsEducationSectionProps> = ({ 
           <div className="lg:col-span-5 space-y-6">
             
             {/* Primary Degree Card */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-7 shadow-xs">
-              <div className="flex items-center justify-between gap-2 pb-4 border-b border-slate-100 dark:border-slate-800">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 font-mono">
+            <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-stone-200 dark:border-zinc-800 p-6 sm:p-7 shadow-xs">
+              <div className="flex items-center justify-between gap-2 pb-4 border-b border-stone-100 dark:border-zinc-800">
+                <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 font-mono">
                   {EDUCATION_DATA.period}
                 </span>
-                <span className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wide">
+                <span className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wide">
                   {currentLang === 'vi' ? 'Đại học chính quy' : 'Formal Bachelor Degree'}
                 </span>
               </div>
 
               <div className="mt-4">
-                <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">
+                <h3 className="text-xl font-extrabold text-zinc-900 dark:text-white">
                   {EDUCATION_DATA.degree[currentLang]}
                 </h3>
-                <p className="text-sm font-medium text-sky-600 dark:text-sky-400 mt-1">
+                <p className="text-sm font-medium text-orange-600 dark:text-orange-400 mt-1">
                   {EDUCATION_DATA.institution[currentLang]}
                 </p>
               </div>
 
               {/* GPA Metric Strip */}
-              <div className="mt-5 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 flex items-center justify-between">
+              <div className="mt-5 p-4 rounded-xl bg-stone-50 dark:bg-zinc-800/60 border border-stone-200/80 dark:border-zinc-700/60 flex items-center justify-between">
                 <div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">
+                  <div className="text-xs text-zinc-500 dark:text-zinc-400">
                     {currentLang === 'vi' ? 'Điểm trung bình tích lũy' : 'Cumulative GPA'}
                   </div>
-                  <div className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  <div className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
                     {currentLang === 'vi' ? 'Xếp loại Khá' : 'Good'}
                   </div>
                 </div>
-                <div className="text-2xl font-extrabold font-mono text-emerald-600 dark:text-emerald-400 tabular-nums">
+                <div className="text-2xl font-extrabold font-mono text-orange-600 dark:text-orange-400 tabular-nums">
                   {EDUCATION_DATA.gpa}
                 </div>
               </div>
 
-              <p className="mt-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="mt-4 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
                 {EDUCATION_DATA.description[currentLang]}
               </p>
 
               {/* Highlights & Modules */}
-              <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2.5">
+              <div className="mt-5 pt-4 border-t border-stone-100 dark:border-zinc-800 space-y-2.5">
                 {EDUCATION_DATA.highlights.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
+                  <div key={idx} className="flex items-start gap-2.5 text-xs text-zinc-600 dark:text-zinc-300">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400 shrink-0 mt-0.5" />
                     <span>{item[currentLang]}</span>
                   </div>
                 ))}
@@ -125,11 +125,11 @@ export const SkillsEducationSection: React.FC<SkillsEducationSectionProps> = ({ 
             </div>
 
             {/* Aviation Standards Box */}
-            <div className="bg-sky-50 dark:bg-sky-950/40 rounded-2xl border border-sky-100 dark:border-sky-900/60 p-6 space-y-3">
-              <div className="text-xs font-bold text-sky-700 dark:text-sky-400 uppercase tracking-wider">
+            <div className="bg-orange-50/80 dark:bg-orange-950/30 rounded-2xl border border-orange-200/70 dark:border-orange-900/50 p-6 space-y-3">
+              <div className="text-xs font-bold text-orange-700 dark:text-orange-400 uppercase tracking-wider">
                 {currentLang === 'vi' ? 'Quy chuẩn an toàn hàng không & dịch vụ' : 'Aviation Ground Safety Standard'}
               </div>
-              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
                 {currentLang === 'vi'
                   ? 'Kinh nghiệm thực tiễn tại SAGS (Cảng Hàng không Quốc tế Tân Sơn Nhất) giúp rèn luyện khả năng tuân thủ quy trình nghiêm ngặt, xử lý khủng hoảng thời gian thực và quản lý sai lệch chất lượng dịch vụ ở tiêu chuẩn cao nhất.'
                   : 'Practical operations at Tan Son Nhat International Airport instilled rigorous standard operating procedure (SOP) compliance, real-time crisis resolution, and high-tolerance quality auditing.'}

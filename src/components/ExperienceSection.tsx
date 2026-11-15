@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Briefcase, Building2, Calendar, MapPin, ChevronRight, CheckCircle2, TrendingUp } from 'lucide-react';
-import { Language, Experience } from '../types';
+import { Calendar, MapPin, CheckCircle2 } from 'lucide-react';
+import { Language } from '../types';
 import { EXPERIENCES } from '../data/portfolioData';
 
 interface ExperienceSectionProps {
@@ -16,21 +16,21 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
     <section
       id="experience"
       style={{ fontFamily: 'system-ui' }}
-      className="py-16 lg:py-24 border-b border-slate-200/80 dark:border-slate-800/80"
+      className="py-16 lg:py-24 border-b border-stone-200/80 dark:border-zinc-800/80"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header with balanced headline & unboxed kicker */}
         <div className="max-w-3xl mb-12">
-          <div className="text-xs font-semibold text-sky-700 dark:text-sky-400 tracking-wide uppercase mb-2">
+          <div className="text-xs font-semibold text-orange-600 dark:text-orange-400 tracking-wide uppercase mb-2">
             <span>Career History</span>
-            <span aria-hidden="true" className="mx-2 text-slate-300 dark:text-slate-700">·</span>
+            <span aria-hidden="true" className="mx-2 text-stone-300 dark:text-zinc-700">·</span>
             <span>Proven Track Record</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white text-balance">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white text-balance">
             {currentLang === 'vi' ? 'Hành Trình Sự Nghiệp & Thành Tích Vận Hành' : 'Work Experience & Operational Milestones'}
           </h2>
-          <p className="mt-3 text-base text-slate-600 dark:text-slate-400">
+          <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
             {currentLang === 'vi'
               ? 'Kinh nghiệm thực chiến từ chỉ huy đội xe logistics quy mô lớn đến thiết lập hệ thống kiểm soát chất lượng kinh doanh cho tập đoàn.'
               : 'Direct leadership from line-haul fleet dispatching across 15 provinces to architecting corporate quality control & BI systems.'}
@@ -50,35 +50,35 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
                   onClick={() => setActiveExpId(exp.id)}
                   className={`p-5 rounded-xl border text-left cursor-pointer transition-all ${
                     isActive
-                      ? 'bg-white dark:bg-slate-900 border-sky-500/80 dark:border-sky-500 shadow-md ring-1 ring-sky-500/20'
-                      : 'bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+                      ? 'bg-white dark:bg-zinc-900 border-orange-500/80 dark:border-orange-500 shadow-md ring-1 ring-orange-500/20'
+                      : 'bg-stone-50 dark:bg-zinc-900/50 border-stone-200 dark:border-zinc-800 hover:border-stone-300 dark:hover:border-zinc-700'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                    <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
                       {exp.period[currentLang]}
                     </span>
                     {exp.isCurrent && (
-                      <span className="text-xs font-semibold text-sky-600 dark:text-sky-400">
+                      <span className="text-xs font-semibold text-orange-600 dark:text-orange-400">
                         {currentLang === 'vi' ? 'Hiện tại' : 'Current'}
                       </span>
                     )}
                   </div>
 
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">
+                  <h3 className="text-base font-bold text-zinc-900 dark:text-white mt-1">
                     {exp.role[currentLang]}
                   </h3>
 
-                  <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 mt-1">
-                    <span className="font-semibold text-slate-800 dark:text-slate-200">{exp.company}</span>
+                  <div className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 mt-1">
+                    <span className="font-semibold text-zinc-800 dark:text-zinc-200">{exp.company}</span>
                     <span aria-hidden="true">·</span>
                     <span>{exp.location}</span>
                   </div>
 
                   {/* Summary Metric Chips (Clean text with separator) */}
-                  <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                  <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-stone-100 dark:border-zinc-800/80 text-xs text-zinc-500 dark:text-zinc-400 font-mono">
                     {exp.metrics.map((m, mIdx) => (
-                      <span key={mIdx} className="font-semibold text-sky-600 dark:text-sky-400 tabular-nums">
+                      <span key={mIdx} className="font-semibold text-orange-600 dark:text-orange-400 tabular-nums">
                         {m.value} {m.label[currentLang]}
                       </span>
                     ))}
@@ -89,18 +89,18 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
           </div>
 
           {/* Right Detailed Case Study Card */}
-          <div className="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm">
+          <div className="lg:col-span-7 bg-white dark:bg-zinc-900 rounded-2xl border border-stone-200 dark:border-zinc-800 p-6 sm:p-8 shadow-sm">
             
             {/* Header of Active Role */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-slate-200/80 dark:border-slate-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-stone-200/80 dark:border-zinc-800">
               <div>
-                <span className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">
+                <span className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wider">
                   {selectedExp.company}
                 </span>
-                <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">
+                <h3 className="text-2xl font-extrabold text-zinc-900 dark:text-white mt-1">
                   {selectedExp.role[currentLang]}
                 </h3>
-                <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mt-1.5">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400 mt-1.5">
                   <span className="inline-flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" />
                     {selectedExp.period[currentLang]}
@@ -118,12 +118,12 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
                 {selectedExp.metrics.map((metric, idx) => (
                   <div
                     key={idx}
-                    className="px-3 py-1.5 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-100 dark:border-sky-900 text-right"
+                    className="px-3 py-1.5 rounded-lg bg-orange-50 dark:bg-orange-950/50 border border-orange-200/80 dark:border-orange-900/70 text-right"
                   >
-                    <div className="text-sm font-extrabold text-sky-700 dark:text-sky-300 font-mono tabular-nums">
+                    <div className="text-sm font-extrabold text-orange-700 dark:text-orange-300 font-mono tabular-nums">
                       {metric.value}
                     </div>
-                    <div className="text-[10px] text-slate-500 dark:text-slate-400">
+                    <div className="text-[10px] text-zinc-500 dark:text-zinc-400">
                       {metric.label[currentLang]}
                     </div>
                   </div>
@@ -133,14 +133,14 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
 
             {/* Core Responsibilities & Impact */}
             <div className="py-6 space-y-4">
-              <h4 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <h4 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                 {currentLang === 'vi' ? 'Nhiệm vụ trọng tâm & Đóng góp định lượng' : 'Key Responsibilities & Quantified Impact'}
               </h4>
 
-              <ul className="space-y-3.5 text-sm text-slate-700 dark:text-slate-300">
+              <ul className="space-y-3.5 text-sm text-zinc-700 dark:text-zinc-300">
                 {selectedExp.highlights[currentLang].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-orange-600 dark:text-orange-400 shrink-0 mt-0.5" />
                     <span className="leading-relaxed">{item}</span>
                   </li>
                 ))}
@@ -148,14 +148,14 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ currentLan
             </div>
 
             {/* Core Competencies Used */}
-            <div className="pt-6 border-t border-slate-100 dark:border-slate-800">
-              <h4 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
+            <div className="pt-6 border-t border-stone-100 dark:border-zinc-800">
+              <h4 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-3">
                 {currentLang === 'vi' ? 'Công cụ & Phương pháp luận ứng dụng' : 'Tools & Methodologies Applied'}
               </h4>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-600 dark:text-slate-300">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-zinc-600 dark:text-zinc-300">
                 {selectedExp.coreSkills.map((skill, idx) => (
                   <span key={idx} className="inline-flex items-center gap-1.5 font-medium">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
                     {skill}
                   </span>
                 ))}

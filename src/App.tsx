@@ -22,10 +22,10 @@ export default function App() {
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
-      if (saved) return saved === 'dark';
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'light') return false;
+      if (saved === 'dark') return true;
     }
-    return false;
+    return true;
   });
 
   const [isCvOpen, setIsCvOpen] = useState<boolean>(false);
@@ -93,7 +93,7 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200 ${isDark ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-stone-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col font-sans transition-colors duration-200 ${isDark ? 'dark' : ''}`}>
       
       {/* Navigation Top Bar Contract */}
       <Navbar
@@ -145,8 +145,8 @@ export default function App() {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold shadow-xl border border-slate-700/50 dark:border-slate-200/50 flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2 duration-200">
-          <span className="w-2 h-2 rounded-full bg-emerald-400" />
+        <div className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-xl bg-zinc-900 dark:bg-zinc-900 text-white text-xs font-semibold shadow-xl border border-orange-500/40 flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2 duration-200">
+          <span className="w-2 h-2 rounded-full bg-orange-500" />
           <span>{toastMessage}</span>
         </div>
       )}
