@@ -10,9 +10,15 @@ import { Footer } from './components/Footer';
 import { CvModal } from './components/CvModal';
 import { Language } from './types';
 import { PERSONAL_INFO } from './data/portfolioData';
-
 export default function App() {
-  const [currentLang, setCurrentLang] = useState<Language>('vi');
+  const [currentLang, setCurrentLang] = useState<Language>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('portfolio_lang');
+      if (saved === 'vi' || saved === 'en') return saved as Language;
+    }
+    return 'en';
+  });
+
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
@@ -21,6 +27,7 @@ export default function App() {
     }
     return false;
   });
+
   const [isCvOpen, setIsCvOpen] = useState<boolean>(false);
   const [phoneCopied, setPhoneCopied] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -39,8 +46,20 @@ export default function App() {
     }
   }, [isDark]);
 
+  // Sync html lang attribute and store preferred language
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      document.documentElement.lang = currentLang;
+      localStorage.setItem('portfolio_lang', currentLang);
+    }
+  }, [currentLang]);
+
   const toggleLanguage = () => {
-    setCurrentLang((prev) => (prev === 'vi' ? 'en' : 'vi'));
+    setCurrentLang((prev) => {
+      const next: Language = prev === 'en' ? 'vi' : 'en';
+      showToast(next === 'vi' ? 'Đã chuyển sang Tiếng Việt (VI)' : 'Switched to English (EN)');
+      return next;
+    });
   };
 
   const showToast = (msg: string) => {

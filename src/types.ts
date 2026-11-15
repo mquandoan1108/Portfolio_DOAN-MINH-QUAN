@@ -1,5 +1,16 @@
 export type Language = 'en' | 'vi';
 
+export interface ProjectGalleryItem {
+  id?: string;
+  src: string;
+  label?: {
+    vi: string;
+    en: string;
+  };
+  isCustom?: boolean;
+  fileName?: string;
+}
+
 export interface Project {
   id: string;
   title: {
@@ -37,6 +48,7 @@ export interface Project {
     en: string;
   };
   image: string;
+  gallery?: ProjectGalleryItem[];
   featured?: boolean;
   keyFindings?: {
     title: { vi: string; en: string };

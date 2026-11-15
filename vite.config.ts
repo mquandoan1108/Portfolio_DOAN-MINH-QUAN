@@ -6,14 +6,17 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
-    // Base is set to repository name in GitHub Actions CI, and './' in dev / AI Studio preview
-    base: process.env.GITHUB_ACTIONS ? '/Portfolio_DOAN-MINH-QUAN/' : './',
+    // Base is set to repository name in GitHub Actions CI, and '/' in dev / AI Studio preview
+    base: process.env.GITHUB_ACTIONS ? '/Portfolio_DOAN-MINH-QUAN/' : '/',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
       },
     },
     server: {
+      port: 3000,
+      host: '0.0.0.0',
+      strictPort: true,
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',

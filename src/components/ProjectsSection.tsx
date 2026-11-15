@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, BarChart2, Database, Layers, Sparkles } from 'lucide-react';
+import { ArrowUpRight, BarChart2, Database, Images, Layers, Sparkles } from 'lucide-react';
 import { Project, Language } from '../types';
 import { PROJECTS } from '../data/portfolioData';
 import { ProjectDetailModal } from './ProjectDetailModal';
+import { useProjectGalleries } from '../hooks/useProjectGalleries';
 
 interface ProjectsSectionProps {
   currentLang: Language;
@@ -11,6 +12,14 @@ interface ProjectsSectionProps {
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
+  const {
+    getSlidesForProject,
+    addSlides,
+    updateSlideLabel,
+    moveCustomSlide,
+    removeSlide,
+    clearCustomSlides,
+  } = useProjectGalleries();
 
   const categories = [
     { id: 'all', label: currentLang === 'vi' ? 'Tất cả dự án' : 'All Projects' },
@@ -75,6 +84,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredProjects.map((project, idx) => {
             const isWide = selectedCategory === 'all' ? (idx === 0 || idx === 3) : false;
+            const projectSlides = getSlidesForProject(project);
+            const hasMultiSlides = projectSlides.length > 1;
+            const supportsGallery = Boolean(project.gallery) || hasMultiSlides;
 
             return (
               <div
@@ -102,9 +114,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
                     <span>{project.categoryLabel[currentLang]}</span>
                   </div>
 
-                  {/* Corner Expand Indicator */}
-                  <div className="absolute bottom-4 right-4 p-2 rounded-lg bg-slate-900/70 backdrop-blur-md text-white opacity-80 group-hover:opacity-100 transition-opacity">
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  {/* Corner Gallery Count & Expand Indicator */}
+                  <div className="absolute bottom-4 right-4 flex items-center gap-2">
+                    {supportsGallery && (
+                      <div className="px-2.5 py-1.5 rounded-lg bg-slate-900/75 backdrop-blur-md text-white text-xs font-semibold font-mono tabular-nums flex items-center gap-1.5 shadow-sm">
+                        <Images className="w-3.5 h-3.5 text-sky-400" />
+                        <span>
+                          {projectSlides.length} {currentLang === 'vi' ? 'ảnh' : projectSlides.length === 1 ? 'slide' : 'slides'}
+                        </span>
+                      </div>
+                    )}
+                    <div className="p-2 rounded-lg bg-slate-900/70 backdrop-blur-md text-white opacity-80 group-hover:opacity-100 transition-opacity">
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
                   </div>
                 </div>
 
@@ -161,6 +183,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ currentLang })
       {/* Project Deep-Dive Modal */}
       <ProjectDetailModal
         project={activeModalProject}
+        slides={getSlidesForProject(activeModalProject)}
+        onAddSlides={addSlides}
+        onUpdateSlideLabel={updateSlideLabel}
+        onMoveCustomSlide={moveCustomSlide}
+        onRemoveSlide={removeSlide}
+        onClearCustomSlides={clearCustomSlides}
         onClose={() => setActiveModalProject(null)}
         currentLang={currentLang}
       />

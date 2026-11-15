@@ -66,12 +66,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onToggleLang}
               type="button"
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors whitespace-nowrap"
-              title={currentLang === 'vi' ? 'Chuyển sang tiếng Anh' : 'Switch to Vietnamese'}
-              aria-label="Toggle language"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700/80 rounded-md transition-all active:scale-95 cursor-pointer shadow-xs whitespace-nowrap"
+              title={currentLang === 'en' ? 'Chuyển sang Tiếng Việt (Switch to Vietnamese)' : 'Switch to English (Chuyển sang tiếng Anh)'}
+              aria-label={currentLang === 'en' ? 'Switch to Vietnamese' : 'Chuyển sang tiếng Anh'}
             >
               <Globe className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
-              <span>{currentLang === 'vi' ? 'EN' : 'VI'}</span>
+              <span>{currentLang === 'en' ? 'VI' : 'EN'}</span>
             </button>
 
             {/* Dark / Light Toggle */}
@@ -129,6 +129,22 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </nav>
           <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2.5">
+            {/* Mobile Language Toggle */}
+            <div className="flex items-center justify-between px-1">
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                {currentLang === 'vi' ? 'Ngôn ngữ (Language):' : 'Language (Ngôn ngữ):'}
+              </span>
+              <button
+                onClick={onToggleLang}
+                type="button"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-md border border-slate-200 dark:border-slate-700 cursor-pointer active:scale-95 transition-all"
+              >
+                <Globe className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+                <span>{currentLang === 'vi' ? 'Tiếng Việt (VI)' : 'English (EN)'}</span>
+              </button>
+            </div>
+
+            {/* Mobile Appearance Toggle */}
             <div className="flex items-center justify-between px-1">
               <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                 {currentLang === 'vi' ? 'Giao diện hiển thị:' : 'Appearance mode:'}
@@ -136,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 onClick={onToggleDark}
                 type="button"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-md border border-slate-200 dark:border-slate-700 cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-md border border-slate-200 dark:border-slate-700 cursor-pointer active:scale-95 transition-all"
               >
                 {isDark ? (
                   <>
@@ -151,6 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 )}
               </button>
             </div>
+
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

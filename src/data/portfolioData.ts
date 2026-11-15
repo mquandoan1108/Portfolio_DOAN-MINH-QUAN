@@ -299,6 +299,17 @@ export const PROJECTS: Project[] = [
       },
     ],
     image: projectLookerVhkdImg,
+    gallery: [
+      {
+        id: 'builtin-overview',
+        src: projectLookerVhkdImg,
+        label: {
+          vi: '/Overview/ — Tổng quan Doanh thu, CP & Lợi nhuận',
+          en: '/Overview/ — Revenue, Cost & Margin Overview',
+        },
+        isCustom: false,
+      },
+    ],
     featured: true,
   },
   {
@@ -419,6 +430,17 @@ export const PROJECTS: Project[] = [
       en: 'Supplied actionable insights for HR and fleet directors to restructure driver shift allowances and rest schedules, stabilizing operational crew retention.',
     },
     image: projectHrAttritionImg,
+    gallery: [
+      {
+        id: 'builtin-hr-attrition',
+        src: projectHrAttritionImg,
+        label: {
+          vi: 'HR Employee Attrition & Retention Analytics',
+          en: 'HR Employee Attrition & Retention Analytics',
+        },
+        isCustom: false,
+      },
+    ],
     featured: true,
   },
   {
