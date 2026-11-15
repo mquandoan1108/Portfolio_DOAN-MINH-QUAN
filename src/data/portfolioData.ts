@@ -1,5 +1,4 @@
 import { Project, Experience, SkillCategory } from '../types';
-import heroPortraitImg from '../assets/images/hero_portrait_1791794365492.jpg';
 import projectLookerVhkdImg from '../assets/images/project_looker_vhkd_1791796308125.jpg';
 import projectLogisticsRouteImg from '../assets/images/project_logistics_route_1791794404484.jpg';
 import projectBiPerformanceImg from '../assets/images/project_bi_performance_1711536390647.jpg';
@@ -30,7 +29,7 @@ export const PERSONAL_INFO = {
     vi: 'TP. Hồ Chí Minh, Việt Nam',
     en: 'Ho Chi Minh City, Vietnam',
   },
-  heroImage: heroPortraitImg,
+  heroImage: '/assets/aistudio/_nh_6ed9b6ab.webp',
   stats: [
     {
       value: '99.65%',

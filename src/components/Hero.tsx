@@ -114,7 +114,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenCv, onCopyPhone }
                 src={PERSONAL_INFO.heroImage}
                 alt={currentLang === 'vi' ? 'Đoàn Minh Quân' : PERSONAL_INFO.name}
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                className="w-full h-full object-cover object-[50%_15%] transition-transform duration-500 group-hover:scale-[1.02]"
                 onError={(e) => {
                   const target = e.currentTarget;
                   target.style.display = 'none';
